@@ -1,0 +1,26 @@
+
+<ion-view style="background: #F8F9FA;" view-title="{{ vm.detialTitle }}">
+    <ion-nav-buttons side="left">
+        <button class="button button-icon icon ion-ios-arrow-back" ng-click="vm.backPage()"> 返回</button>
+    </ion-nav-buttons>
+    <ion-content overflow-scrolling="false" class="detail-view-content">
+       <ul class="detail-process-ul">
+           <li>当前处理人：<span>{{ vm.DocumentAuthors }}</span></li>
+           <li>当前处理状态：<span>{{ vm.stat }}</span></li>
+       </ul>
+        <div class="detail-process-div">
+            <span>正文/附件</span>
+        </div>
+        <ion-list>
+            <ion-item class=" item-histort" ng-repeat=" item in vm.processList">
+                <span> {{ item.historyNo}}</span>
+                <div>
+                    <h2>{{ item.dealLink }}</h2>
+                    <!--<h3>{{ item.dealOption }}</h3>-->
+                    <bt>{{ item.dealUser }}</bt>
+                    <bt>{{ item.dealTime}}</bt>
+                </div>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

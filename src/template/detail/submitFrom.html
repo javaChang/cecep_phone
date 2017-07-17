@@ -1,0 +1,142 @@
+
+<ion-view style="background: #F8F9FA;" view-title="请确认提交信息">
+    <ion-nav-buttons side="left">
+        <button class="button button-icon icon ion-ios-arrow-back" ng-click="$ionicGoBack()"> 返回</button>
+    </ion-nav-buttons>
+    <ion-content overflow-scrolling="false">
+        <div ng-if="vm.divShowSubmit == true">
+            <div class="detail-process-div" >
+                <span>下一环节:</span>
+                <span ng-bind="vm.submitData.attinfo[0].nextname"></span>
+            </div>
+            <div class="detail-process-div">
+                <span>办理人</span>
+            </div>
+            <div>
+                <ul class="list detail-from-submit">
+                    <li>
+                        <div class="row deital-row-li">
+                            <div class="col col-deital" ng-bind="vm.assigns" ng-click="vm.popupScope(1,'assigns','')"></div>
+                            <i class="icon ion-chevron-right col-i-detail"></i>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div ng-if="vm.divShowHq == true">
+            <div class="detail-process-div">
+                <span>会签部门</span>
+            </div>
+            <div>
+                <ul class="list detail-from-submit">
+                    <li>
+                        <div class="row deital-row-li">
+                            <div class="col col-deital" ng-bind="vm.fldZhuSongDWSub" ng-click="vm.popupScope(0,'fldZhuSongDWSub','fldZhuSongDWSub_id')"></div>
+                            <i class="icon ion-chevron-right col-i-detail"></i>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="detail-process-div">
+                <span>知会人员</span>
+            </div>
+            <div>
+                <ul class="list detail-from-submit">
+                    <li>
+                        <div class="row deital-row-li">
+                            <div class="col col-deital" ng-bind="vm.fldZhiHuiRYSub" ng-click="vm.popupScope(1,'fldZhiHuiRYSub','')"></div>
+                            <i class="icon ion-chevron-right col-i-detail"></i>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div ng-if="vm.divShowSyb == true">
+            <div class="detail-process-div">
+                <span>主办单位</span>
+            </div>
+            <div>
+                <ul class="list detail-from-submit">
+                    <li>
+                        <div class="row deital-row-li">
+                            <div class="col col-deital" ng-bind="vm.fldZhuSongDWSub" ng-click="vm.popupScope(0,'fldZhuSongDWSub','fldZhuSongDW_id')"></div>
+                            <i class="icon ion-chevron-right col-i-detail"></i>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="detail-process-div">
+                <span>协办单位</span>
+            </div>
+            <div>
+                <ul class="list detail-from-submit">
+                    <li>
+                        <div class="row deital-row-li">
+                            <div class="col col-deital" ng-bind="vm.fldChaoSongDWSub" ng-click="vm.popupScope(0,'fldChaoSongDWSub','fldChaoSongDW_id')"></div>
+                            <i class="icon ion-chevron-right col-i-detail"></i>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="detail-process-div">
+                <span>阅知部门</span>
+            </div>
+            <div>
+                <ul class="list detail-from-submit">
+                    <li>
+                        <div class="row deital-row-li">
+                            <div class="col col-deital" ng-bind="vm.fldYueZhiSub" ng-click="vm.popupScope(0,'fldYueZhiSub','fldYueZhi_id')"></div>
+                            <i class="icon ion-chevron-right col-i-detail"></i>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="detail-process-div">
+                <span>阅知人员</span>
+            </div>
+            <div>
+                <ul class="list detail-from-submit">
+                    <li>
+                        <div class="row deital-row-li">
+                            <div class="col col-deital" ng-bind="vm.fldYueZhiRySub" ng-click="vm.popupScope(1,'fldYueZhiRy','')"></div>
+                            <i class="icon ion-chevron-right col-i-detail"></i>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div ng-if="vm.divShowZzhq == true">
+            <div class="detail-process-div">
+                <span>终止会签部门</span>
+            </div>
+            <div>
+                <ul class="list detail-from-submit">
+                    <li>
+                        <div class="row deital-row-li">
+                            <div class="col col-deital" ng-bind="vm.fldEndHqbmSub" ng-click="vm.popupScope(0,'fldEndHqbmSub','fldEndHqbm_id')"></div>
+                            <i class="icon ion-chevron-right col-i-detail"></i>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="detail-process-div">
+                <span>终止知会人员</span>
+            </div>
+            <div>
+                <ul class="list detail-from-submit">
+                    <li>
+                        <div class="row deital-row-li">
+                            <div class="col col-deital" ng-bind="vm.fldZhiHuiRYSub" ng-click="vm.popupScope(1,'fldZhiHuiRYSub','')"></div>
+                            <i class="icon ion-chevron-right col-i-detail"></i>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row row-wrap">
+            <div class="col col-50 col-50-action" ng-click="vm.submitFlow()">确认</div>
+        </div>
+
+    </ion-content>
+</ion-view>

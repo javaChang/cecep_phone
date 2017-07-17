@@ -1,0 +1,21 @@
+
+<ion-view style="background: #F8F9FA;" view-title="{{ vm.detialTitle }}">
+    <ion-nav-buttons side="left">
+        <button class="button button-icon icon ion-ios-arrow-back" ng-click="vm.backPage()"> 返回</button>
+    </ion-nav-buttons>
+    <ion-content overflow-scrolling="false" class="detail-view-content">
+        <div class="main-container">
+            <div class="main-list">
+                <div class="list-default" ng-if="vm.isContent == false">
+                    暂无内容
+                </div>
+                <div ng-if="vm.isContent == true">
+                    <ul class="detail-process-ul">
+                        <li>已阅范围：<p ng-bind="vm.notifyUser" ></p></li>
+                        <li>已阅人员：<p ng-bind="vm.readUser" ></p></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

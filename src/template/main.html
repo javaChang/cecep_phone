@@ -1,0 +1,33 @@
+<ion-view view-title="公文" hide-back-button="true">
+    <ion-nav-buttons side="left">
+        <button class="button button-icon icon ion-ios-arrow-back" ng-click="$ionicGoBack()"> 返回</button>
+    </ion-nav-buttons>
+        <ion-tabs class="tabs-icon-only tabs-top ">
+            <!--href:选项卡对应的状态 icon-on:ion-tab非高亮图标  icon-off:ion-tab高亮图标-->
+            <ion-tab title="待办" href="#/main/db" on-select="vm.menu = false">
+                <!--同一状态下有多个ion-nav-view,因此需要给它们设置name属性。并在配制路由的时候对应状态和渲染视图-->
+                <ion-nav-view name="tab-db"></ion-nav-view>
+            </ion-tab>
+            <ion-tab title="已办" href="#/main/yb" on-select="vm.menu = false">
+                <!--同一状态下有多个ion-nav-view,因此需要给它们设置name属性。并在配制路由的时候对应状态和渲染视图-->
+                <ion-nav-view name="tab-yb"></ion-nav-view>
+            </ion-tab>
+            <ion-tab title="待阅" href="#/main/dy" on-select="vm.menu = false">
+                <!--同一状态下有多个ion-nav-view,因此需要给它们设置name属性。并在配制路由的时候对应状态和渲染视图-->
+                <ion-nav-view name="tab-dy"></ion-nav-view>
+            </ion-tab>
+            <ion-tab title="已阅" href="#/main/yy" on-select="vm.menu = false">
+                <!--同一状态下有多个ion-nav-view,因此需要给它们设置name属性。并在配制路由的时候对应状态和渲染视图-->
+                <ion-nav-view name="tab-yy"></ion-nav-view>
+            </ion-tab>
+            <!--<ion-tab title="公文" ng-click="vm.menuSelect()">-->
+                <!--&lt;!&ndash;同一状态下有多个ion-nav-view,因此需要给它们设置name属性。并在配制路由的时候对应状态和渲染视图&ndash;&gt;-->
+                <!--<ion-nav-view name="tab-menu"></ion-nav-view>-->
+            <!--</ion-tab>-->
+        </ion-tabs>
+        <div class="menu-div" ng-if="vm.menu">
+            <div>
+                <h3 ng-repeat="item in vm.listDept" ng-click="vm.hrefkip('{{item.deptName}}')" ng-bind="item.deptName"></h3>
+            </div>
+        </div>
+</ion-view>

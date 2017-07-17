@@ -1,0 +1,45 @@
+
+<ion-view style="background: #F8F9FA;" view-title="{{ vm.detialTitle }}">
+    <ion-nav-buttons side="left">
+        <button class="button button-icon icon ion-ios-arrow-back" ng-click="vm.backPage()"> 返回</button>
+    </ion-nav-buttons>
+    <ion-content overflow-scrolling="false" class="detail-view-content">
+        <div class="detail-process-div" ng-if="vm.selectDiv == true">
+            <span>办理意见</span>
+        </div>
+        <div class="do-box" ng-if="vm.selectDiv == true">
+            <div class="do-form do-form-select" data-tap-disabled=”true”>
+                <select ng-init="vm.selectedName = vm.selectDate[0]" ng-change="vm.infoChange()" ng-model="vm.selectedName" ng-options="x for x in vm.selectDate">
+                </select>
+            </div>
+            <div class="do-form">
+                <textarea rows="2" placeholder="请填写意见" ng-model="vm.selData" ></textarea>
+            </div>
+        </div>
+        <div class="detail-process-div">
+            <span>公文流转</span>
+        </div>
+        <div class="row row-wrap">
+            <div class="col col-50" ng-class="{true: 'col-50-action', false: ''}[vm.detailRow == '{{ rowItem.id }}']" ng-repeat=" rowItem in vm.documentFlow" ng-bind="rowItem.name" ng-click="vm.selectFlow('{{ rowItem.id }}')"></div>
+        </div>
+        <div class="row row-wrap">
+            <div class="col col-50 col-50-action" ng-if="vm.actionDocBtn.fldtijiao == 1" ng-click="vm.actionDocument('1')">提交</div>
+            <div class="col col-50 col-50-action" ng-if="vm.actionDocBtn.fldEndHq == 1" ng-click="vm.actionDocument('5')">终止会签</div>
+            <div class="col col-50 col-50-action" ng-if="vm.actionDocBtn.fldsyb == 1" ng-click="vm.actionDocument('6')">送阅办</div>
+            <div class="col col-50 col-50-action" ng-if="vm.actionDocBtn.fldsbl == 1" ng-click="vm.actionDocument('15')">送办理</div>
+            <div class="col col-50 col-50-action" ng-if="vm.actionDocBtn.fldEndsbl == 1" ng-click="vm.actionDocument('16')">终止办理</div>
+            <div class="col col-50 col-50-action" ng-if="vm.actionDocBtn.fldHq == 1" ng-click="vm.actionDocument('3')">会签</div>
+            <div class="col col-50 col-50-action" ng-if="vm.actionDocBtn.fldbmfk == 1" ng-click="vm.actionDocument('14')">部门反馈</div>
+            <div class="col col-50 col-50-action" ng-if="vm.actionDocBtn.fldbmfk == 2" ng-click="vm.actionDocument('142')">部门反馈</div>
+        </div>
+        <div class="detail-process-div">
+            <span>常用功能</span>
+        </div>
+        <div class="row row-wrap">
+            <div class="col col-50 col-50-action" ng-if="vm.actionDocBtn.fldShowYyBtn == 1" ng-click="vm.actionDocument('13')">已阅</div>
+            <div class="col col-50 col-50-action" ng-if="vm.actionDocBtn.fldUndo == 1" ng-click="vm.actionDocument('9')">撤回</div>
+            <div class="col col-50 col-50-action" ng-if="vm.actionDocBtn.fldsave == 1" ng-click="vm.actionDocument('8')">保存退出</div>
+            <div class="col col-50 col-50-action"  ng-click="vm.backPage()">退出</div>
+        </div>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,12 @@
+<ul class="treeUl" >
+    <li ng-repeat="item in source">
+        <i class="depart" ng-click="toggleEvent(item,$event,item.UserAgency[0]['agencyId.s'])" ng-if="item.UserAgency.length > 0"></i>
+        <span ng-bind="item.UserAgency[0]['agencyName.s']" ng-if="item.UserAgency.length > 0"></span>
+        <i class="checkImg" ng-click="selectClick(item.UserAgency[0]['agencyName.s'],item.UserAgency[0]['agencyId.s'],item.UserAgency[0]['originalCurrentId.s'],$event)" ng-if=" item.agencyType == 0"></i>
+
+        <span ng-bind="item.UserAccount[0]['realName.s']" ng-if="item.UserAccount.length > 0"></span>
+        <i class="checkImg" ng-click="selectClickRy(item.UserAccount[0]['realName.s'],item.UserAccount[0]['userId.s'],item.UserAccount[0]['userName.s'],$event)" ng-if="item.UserAccount.length > 0"></i>
+
+        <ng-tissue-tree agency-id="{{ item.agencyId }}" source="item.children"  agency-type="{{ item.agencyType }}" ng-show="item.show_child"  source-json="item.sourceJson"></ng-tissue-tree>
+    </li>
+</ul>

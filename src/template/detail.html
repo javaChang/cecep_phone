@@ -1,0 +1,16 @@
+<ion-view view-title="公文详情" hide-back-button="true">
+    <ion-nav-buttons side="left">
+        <button class="button button-icon icon ion-ios-arrow-back" ng-click="$ionicGoBack()"> 返回</button>
+    </ion-nav-buttons>
+    <div class="picturesholder">
+        <ion-scroll direction="x" scrollbar-x="false">
+            <span ng-class="{true: 'detail-item-action', false: ''}[vm.scheduleState == 'detailFrom']" ng-click="vm.tabSelectCss('detailFrom')">主表单</span>
+            <span ng-class="{true: 'detail-item-action', false: ''}[vm.scheduleState == 'fileList']" ng-click="vm.tabSelectCss('fileList')">正文/附件</span>
+            <span ng-class="{true: 'detail-item-action', false: ''}[vm.scheduleState == 'history']" ng-click="vm.tabSelectCss('history')">历史意见</span>
+            <span ng-class="{true: 'detail-item-action', false: ''}[vm.scheduleState == 'process']" ng-click="vm.tabSelectCss('process')">流程跟踪</span>
+            <span ng-class="{true: 'detail-item-action', false: ''}[vm.scheduleState == 'record']" ng-click="vm.tabSelectCss('record')">待阅记录</span>
+            <span ng-class="{true: 'detail-item-action', false: ''}[vm.scheduleState == 'do']" ng-click="vm.tabSelectCss('do')">文件办理</span>
+        </ion-scroll>
+    </div>
+    <ion-nav-view name="tab-detail-table" class="detail-view" ></ion-nav-view>
+</ion-view>

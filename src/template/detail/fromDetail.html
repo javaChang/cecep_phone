@@ -1,0 +1,988 @@
+
+<ion-view style="background: #F8F9FA;" view-title="{{ vm.detialTitle }}">
+    <ion-nav-buttons side="left">
+        <button class="button button-icon icon ion-ios-arrow-back" ng-click="vm.backPage()"> 返回</button>
+    </ion-nav-buttons>
+    <ion-content overflow-scrolling="false" class="detail-view-content">
+        <!-- 签报 -->
+        <div ng-if="vm.fromType == 'jtqb'">
+            <ul class="list detail-from">
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">标题</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldSubject"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">编号</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldFwbh"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">附件</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldFjAttMc.data"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">呈送领导</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldcsld" ng-click="vm.popupScope(1,'fldcsld','')"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">紧急程度</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldJinJi"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">拟稿单位</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldNiGaoDW"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">拟稿人</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldNiGaoRen"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">拟稿日期</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldQiCaoRQ"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">联系电话</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldDh"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">会签部门</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldZhuSongDW" ng-click="vm.popupScope(0,'fldZhuSongDW','fldZhuSongDW_id')"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">阅知部门</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldYueZhiBM" ng-click="vm.popupScope(0,'fldYueZhiBM','fldYueZhiBM_id')"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">阅知人员</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldYueZhiRy" ng-click="vm.popupScope(1,'fldYueZhiRy','')"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">备注</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldSwBeiZhu.data"></div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- 收文 -->
+        <div ng-if="vm.fromType == 'jtsw'">
+            <ul class="list detail-from">
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">标题</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldSubject"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">编号</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldFwbh"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">紧急程度</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldJinJi"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">附件</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldFjAttMc.data"></div>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">来文单位</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.ldLwjg"></div>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">收文类型</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldswlx"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">来文字号</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldLwzh"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">来文渠道</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldLwqd"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">联系电话</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldDh"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">收文日期</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldswrq"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">主送领导</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldFaSongRY" ng-click="vm.popupScope(1,'fldFaSongRY','fldFaSongRY_id')"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">主办单位</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldZhuSongDW" ng-click="vm.popupScope(0,'fldZhuSongDW','fldZhuSongDW_id')"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">协办单位</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldChaoSong" ng-click="vm.popupScope(0,'fldChaoSong','fldChaoSong_id')"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">阅知单位</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldYueZhi" ng-click="vm.popupScope(0,'fldYueZhi','fldYueZhi_id')"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">阅知人员</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldYueZhiRy" ng-click="vm.popupScope(1,'fldYueZhiRy','fldYueZhiRy_id')"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">提前抄送</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldIsCsbm"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">是否上报</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldIsSb"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">完成时限</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldSbsx"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">时限要求</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldWcsx"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">备注</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldSwBeiZhu.data"></div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- 发文 -->
+        <div ng-if="vm.fromType == 'jtfw'">
+            <ul class="list detail-from">
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">标题</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldSubject"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">编号</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldFwbh"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">紧急程度</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldJinJi"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">附件</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldFjAttMc.data"></div>
+                    </div>
+                </li>
+                <!-- 需重新设计 -->
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">主送单位</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldZhuSongDW"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">主送单位</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldChaoSong"></div>
+                    </div>
+                </li>
+                <!-- 需重新设计 -->
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">集团领导</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldFaSongRY"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">拟稿单位</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldNiGaoDW"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">拟稿人</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldNiGaoRen"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">拟稿日期</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldQiCaoRQ"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">发文日期</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldFaWenRQ"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">签发顺序</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldQianFaLD"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">会签部门</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldHuiQian" ng-click="vm.popupScope(0,'fldHuiQian','fldHuiQian_id')"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">备注</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldSwBeiZhu.data"></div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- 会议纪要 -->
+        <div ng-if="vm.fromType == 'jthyjy'">
+            <ul class="list detail-from">
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">标题</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldSubject"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">编号</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldFwbh"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">紧急程度</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldJinJi"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">附件</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldFjAttMc.data"></div>
+                    </div>
+                </li>
+                <!-- 需重新设计 -->
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">抄送单位</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldZhuSongDW"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">主送单位</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldChaoSong"></div>
+                    </div>
+                </li>
+                <!-- 需重新设计 -->
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">抄送领导</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldFaSongRY"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">拟稿单位</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldNiGaoDW"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">拟稿人</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldNiGaoRen"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">拟稿日期</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldQiCaoRQ"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">发文日期</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldFaWenRQ"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">会签部门</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldHuiQian"></div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- 协办单 -->
+        <div ng-if="vm.fromType == 'xbd'">
+            <ul class="list detail-from">
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">标题</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldSubject"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">编号</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldFwbh"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">紧急程度</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldJinJi"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">拟稿单位</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldNiGaoDW"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">拟稿人</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldNiGaoRen"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">拟稿日期</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldQiCaoRQ"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">联系电话</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldDh"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">协办单位</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldZhuSongDW"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">时间要求</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldSjYq"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">协办事项</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldZhaiYao"></div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- 白头文 -->
+        <div ng-if="vm.fromType == 'qtwj'">
+            <ul class="list detail-from">
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">标题</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldSubject"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">编号</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldFwbh"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">紧急程度</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldJinJi"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">附件</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldFjAttMc.data"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">呈送领导</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldcsld"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">拟稿单位</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldNiGaoDW"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">拟稿人</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldNiGaoRen"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">拟稿日期</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldQiCaoRQ"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">联系电话</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldDh"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">主办单位</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldZhuSongDW"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">协办单位</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldChaoSong"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">阅知单位</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldYueZhi"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">阅知人员</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldYueZhiRy"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">备注</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldSwBeiZhu.data"></div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- 签报收文 -->
+        <div ng-if="vm.fromType == 'qbsw'">
+            <ul class="list detail-from">
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">标题</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldSubject"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">签报编号</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldFwbh"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">紧急程度</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldJinJi"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">呈送领导</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldcsld"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">拟稿单位</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldNiGaoDW"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">拟稿人</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldNiGaoRen"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">拟稿日期</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldQiCaoRQ"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">联系电话</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldDh"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">阅知部门</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldYueZhiBM" ng-click="vm.popupScope(0,'fldYueZhiBM','fldYueZhiBM_id')"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">会签领导</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldQianFaLD" ng-click="vm.popupScope(1,'fldQianFaLD','')"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">会签部门</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldZhuSongDW" ng-click="vm.popupScope(0,'fldZhuSongDW','fldZhuSongDW_id')"></div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- 发文会签收文 -->
+        <div ng-if="vm.fromType == 'fwhq'">
+            <ul class="list detail-from">
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">标题</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldSubject"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">发文编号</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldFwbh"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">紧急程度</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldJinJi"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">文件序号</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldFwxh"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">主送单位</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldZhuSongDW_fw" ></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">抄送单位</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldChaoSong_disp"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">拟稿单位</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldNiGaoDW"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">拟稿人</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldNiGaoRen"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">核稿人</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldHeGao"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">校对</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldJiaoDui_1"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">发文日期</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldFaWenRQ"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">签发顺序</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldQianFaLD" ng-click="vm.popupScope(1,'fldQianFaLD','')"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">会签部门</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldHuiQian" ng-click="vm.popupScope(0,'fldHuiQian','fldHuiQian_id')"></div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- 下行发文收文 -->
+        <div ng-if="vm.fromType == 'fwsw'">
+            <ul class="list detail-from">
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">标题</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldSubject"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">收文字号</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldFwbh"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">紧急程度</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldJinJi"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">来文单位</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldLwjg"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">收文日期</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldswrq"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">来文字号</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldLwzh"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">收文类型</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldswlx"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">主送领导</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldFaSongRY" ng-click="vm.popupScope(1,'fldFaSongRY','')"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">主办部门</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldZhuSongDW" ng-click="vm.popupScope(0,'fldZhuSongDW','fldZhuSongDW_id')"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">协办部门</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldChaoSong" ng-click="vm.popupScope(0,'fldChaoSong','fldChaoSong_id')"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">阅知部门</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldYueZhi" ng-click="vm.popupScope(0,'fldYueZhi','fldYueZhi_id')"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">完成时限</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldSbsx"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">详细说明</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldWcsx"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">传阅范围</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldCyFw"></div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- 白头文收文 -->
+        <div ng-if="vm.fromType == 'btw'">
+            <ul class="list detail-from">
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">标题</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldSubject"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">文件编号</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldFwbh"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">紧急程度</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldJinJi"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">呈送领导</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldcsld"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">呈送领导</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldcsld"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">拟稿单位</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldNiGaoDW"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">拟稿人</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldNiGaoRen"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">拟稿日期</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldQiCaoRQ"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">联系电话</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldDh"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">来文单位</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldswlx"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">来文字号</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldLwzh"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">收文日期</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldswrq"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">主办单位</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldZhuBanDW"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">协办单位</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldXieBanDW"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">阅知单位</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldYueZhiDW"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">阅知人员</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldYueZhiRy"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">备注</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldSwBeiZhu.data"></div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- 协办单收文 -->
+        <div ng-if="vm.fromType == 'xbdsw'">
+            <ul class="list detail-from">
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">标题</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldSubject"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">编号</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldFwb"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">紧急程度</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldJinJi"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">起草部门</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldNiGaoDW"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">起草人</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldNiGaoRen"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">起草日期</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldQiCaoRQ"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">标题</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldSubject"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">是否审核</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldJgCk"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">联系电话</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldDh"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">协办单位</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldZhuSongDW_1"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">时间要求</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldSjYq"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">协办事项</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldZhaiYao"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">办理结果</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldBlJg"></div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+
+    </ion-content>
+    <div class="loading-mask" ng-class="{true:'loading-mask active', false:'loading-mask'}[vm.isActive]"></div>
+</ion-view>

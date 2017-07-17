@@ -1,0 +1,22 @@
+﻿@charset "UTF-8";
+
+@import 
+        // 初始变量和函数
+        'variables', 
+        'mixins',
+        
+        // 初始化样式和共用样式
+        'reset',
+        'util', 
+        
+        // 模块样式
+        'module',
+
+        //公共模块
+        'public',
+
+        //详情模块
+        'detail',
+
+        //列表样式
+        'list';

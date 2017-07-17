@@ -1,0 +1,388 @@
+﻿.picturesholder {
+    margin-top: 90px;
+    height: 88px;
+    line-height: 88px;
+    background: #F7F9FA;
+    overflow: hidden;
+    white-space: nowrap;
+    span {
+        font-family: PingFangSC-Regular;
+        font-size: 28px;
+        color: #666666;
+        letter-spacing: 0;
+        line-height: 28px;
+        padding: 25px 35px;
+    }
+}
+
+.detail-item-action {
+    border-bottom: 2px solid #029BEA;
+    color: #029BEA  !important;
+}
+
+.detail-view {
+    ion-content {
+        top:0;
+    }
+}
+
+
+.file-item {
+    background: #fff;
+    font-family: PingFangSC-Regular;
+
+    img {
+        background: #F7F9FA;
+        border-radius: 8px;
+        width: 100px !important;
+        height: 100px !important;
+    }
+
+    h2 {
+
+        font-size: 28px;
+        color: #333333;
+        letter-spacing: 0;
+        line-height: 28px;
+        margin-top: 15px;
+        margin-right: 150px;
+
+    }
+
+    p{
+        font-size: 28px;
+        color: #999999;
+        letter-spacing: 0;
+        line-height: 28px;
+        margin-top: 24px;
+
+    }
+    div {
+        position: absolute;
+        right: 28px;
+        top: 30%;
+        opacity: 0.5;
+        background: #0099ED;
+        border-radius: 8px;
+
+        font-size: 26px;
+        color: #FFFFFF;
+        letter-spacing: 0;
+        width: 121px;
+        text-align: center;
+        padding-top: 11px;
+        padding-bottom: 11px;
+    }
+}
+
+.item-thumbnail-left, .item-thumbnail-left {
+    min-height: auto;
+    padding-left: 156px;
+
+}
+
+.item-histort {
+
+    font-family: PingFangSC-Regular;
+
+    span {
+        position: absolute;
+        background: #029BEA;
+        border-radius: 8px;
+        padding: 12px 23px;
+
+        font-size: 36px;
+        color: #FFFFFF;
+        letter-spacing: 0;
+        line-height: 36px;
+    }
+
+    div {
+        margin-left: 120px;
+
+        h2 {
+            font-size: 28px;
+            color: #666666;
+            letter-spacing: 0;
+
+        }
+
+        h3 {
+            font-size: 28px;
+            color: #029BEA;
+            letter-spacing: 0;
+            //line-height: 28px;
+            margin-top: 24px;
+            word-wrap: break-word;
+            white-space:normal;
+            line-height: 36px;
+        }
+
+        dl {
+           dt {
+               display: inline-block;
+               font-size: 28px;
+               color: #999999;
+               letter-spacing: 0;
+               line-height: 28px;
+               &:nth-child(2){
+                   float: right;
+               }
+           }
+
+        }
+
+    }
+}
+
+.detail-view-content {
+    bottom: 160px;
+}
+
+.detail-button-back {
+    font-family: PingFangSC-Regular;
+    font-size: 28px;
+    color: #FFFFFF;
+    letter-spacing: 0;
+    line-height: 28px;
+}
+
+
+.detail-process-ul {
+    font-family: PingFangSC-Regular;
+
+    li {
+        background: #FFFFFF;
+        padding: 37px 28px;
+        font-size: 28px;
+        color: #333333;
+        letter-spacing: 0;
+        line-height: 28px;
+        &:nth-child(1) {
+            border-bottom: 1px solid #eee;
+        }
+    }
+
+    span{
+        position: absolute;
+        left: 240px;
+        font-size: 28px;
+        color: #666666;
+        letter-spacing: 0;
+        line-height: 28px;
+
+    }
+
+    p {
+        font-size: 28px;
+        color: #666666;
+        letter-spacing: 0;
+        line-height: 35px;
+        margin:{
+               top: -30px;
+               left: 130px;
+        }
+
+    }
+}
+
+.detail-process-div{
+    padding: {
+        top:30px;
+        bottom: 30px;
+        left:28px;
+    };
+    span {
+        font-size: 28px;
+        color: #029BEA;
+        letter-spacing: 0;
+        line-height: 28px;
+        padding-left: 20px;
+        border: {
+            left: 3px solid #029BEA;
+        }
+        &:nth-child(2) {
+            border-left: none;
+        }
+    }
+
+}
+
+.do-form {
+    background: #FFFFFF;
+    border-bottom: 1px solid #EFEFEF;
+    select {
+        line-height: 100px;
+        height: 100px;
+        width: 100%;
+        padding: {
+            left: 28px;
+            right: 28px;
+        };
+
+
+    }
+    textarea {
+        line-height: 100px;
+        height: 100px;
+        width: 100%;
+        padding: {
+            left: 40px;
+            right: 28px;
+        };
+    }
+}
+.do-form-select:after {
+    float: right;
+    display: block;
+    width: 0;
+    height: 0;
+    border-top: 0.42rem solid;
+    border-right: 0.42rem solid transparent;
+    border-left: 0.42rem solid transparent;
+    color: #029BEA;
+    content: "";
+    pointer-events: none;
+    margin-right: 20px;
+    margin-top: -48px;
+}
+
+.select-defaile {
+    color: #CCCCCC;
+}
+
+.row {
+    margin-top: -30px;
+}
+.col-50 {
+    //opacity: 0.5;
+    background: #FFFFFF;
+    border: 2px solid #029BEA;
+    border-radius: 8px;
+    font-family: PingFangSC-Regular;
+    font-size: 32px;
+    color: #666666;
+    letter-spacing: 0;
+    line-height: 32px;
+    padding: 34px;
+    max-width: 45%;
+    margin-left: 28px;
+    margin-top: 30px;
+    text-align: center;
+}
+
+.col-50-action {
+    background: #029BEA;
+    font-size: 32px;
+    color: #FFFFFF;
+    letter-spacing: 0;
+    line-height: 32px;
+}
+
+
+.detail-from {
+    li {
+        background: #fff;
+        //height: 120px;
+        border-bottom: 1px solid #cecece;
+        font-size: 28px;
+    }
+}
+
+.detail-from-submit {
+    li {
+        background: #fff;
+        //height: 120px;
+        //border-bottom: 1px solid #cecece;
+        font-size: 28px;
+    }
+}
+
+
+
+.deital-row-li {
+    margin-top: 0;
+    padding:{
+        top:20px;
+        bottom: 20px;
+    }
+}
+
+.col-20 {
+    color: #333333;
+    letter-spacing: 0;
+    text-align:justify;
+    text-align-last:justify;
+    &:after {
+        position: absolute;
+        content:'：';
+    }
+}
+.col-80 {
+    text-overflow:ellipsis;
+    overflow:hidden;
+    white-space:nowrap;
+    font-family: PingFangSC-Regular;
+    color: #666666;
+    letter-spacing: 0;
+    padding-right: 28px;
+    padding-left: 40px;
+}
+
+
+.col-i-detail {
+    margin-top: 13px;
+    color: #ccc;
+}
+
+
+
+
+
+
+
+
+.form-title{/* 标题 */
+    float: left;
+    font-size: 28px;
+    margin-right: 10px;
+    margin-top: 5px;
+    color: #333333;
+    text-align: right;
+    font-family: PingFangSC-Regular;
+    letter-spacing: 0;
+    line-height: 28px;
+}
+
+/** 解决文字对齐问题 20160928 于阳 begin**/
+
+.form-title-scope{
+    width: 140px;
+}
+
+.form-title-name {
+    float: left;
+    line-height: 28px;
+    margin-right: 7px;
+    overflow: hidden;
+    text-align: center;
+    width: 4em; /*这个值是看最长能显示几个文字，如x，则为x em*/
+    width: 140px;
+}
+.form-title-name span{
+    display:block;
+    font-size:28px;
+    line-height: 28px;
+    margin-top: 5px;
+}
+.characters-num2{
+    letter-spacing:2em;
+    margin-right:-2em;
+}
+.characters-num3{
+    letter-spacing:0.5em;
+    margin-right:-0.5em;
+}
+
+/** 解决文字对齐问题 20160928 于阳 end**/
+

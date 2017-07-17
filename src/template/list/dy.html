@@ -1,0 +1,32 @@
+
+<ion-view style="background: #F8F9FA;" view-title="公文">
+    <ion-content overflow-scrolling="false">
+        <ion-refresher pulling-text="下拉刷新" on-refresh="vm.pathReload()"></ion-refresher>
+        <div class="main-container">
+            <div ng-if="vm.isActive"></div>
+            <div class="main-list">
+                <div class="list-default" ng-if="vm.listItem.length == 0">
+                    暂无内容
+                </div>
+                <div class="list-content" ng-repeat="item in vm.listItem" ng-if="vm.listItem.length > 0" ui-sref="detail({id:item.href,type:item.column7,backUrl:'dy'})">
+                    <h3 ng-bind="item.column2"></h3>
+                    <dl>
+                        <dt ><img src="../../img/user.png">
+                            <dd ng-bind="item.column3"></dd>
+                        </dt>
+
+                        <dt >
+                            <img src="../../img/yj.png">
+                            <dd ng-bind="item.column5"></dd>
+                        </dt>
+
+                        <dd ng-bind="item.column6.substring(0,10)"></dd>
+                    </dl>
+                </div>
+                <div class="dataAll" ng-show="!vm.disabled" ng-bind="vm.dataTips"></div>
+             </div>
+            <ion-infinite-scroll ng-if="vm.disabled" on-infinite="vm.nextPage()"  distance="1%" immediate-check="false"></ion-infinite-scroll>
+        </div>
+    </ion-content>
+    <div class="loading-mask" ng-class="{true:'loading-mask active', false:'loading-mask'}[vm.isActive]"></div>
+</ion-view>

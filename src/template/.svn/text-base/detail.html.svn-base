@@ -1,0 +1,6 @@
+<ion-view view-title="detail">
+    <ion-content class="padding">
+      	<p ng-bind="vm.txt"></p>
+      	<img src="img/loading.gif" />
+    </ion-content>
+</ion-view>

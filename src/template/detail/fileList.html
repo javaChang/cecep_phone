@@ -1,0 +1,16 @@
+
+<ion-view style="background: #F8F9FA;" view-title="{{ vm.detialTitle }}">
+    <ion-nav-buttons side="left">
+        <button class="button button-icon icon ion-ios-arrow-back" ng-click="vm.backPage()"> 返回</button>
+    </ion-nav-buttons>
+    <ion-content overflow-scrolling="false" class="detail-view-content">
+        <ion-list>
+            <ion-item class="item-thumbnail-left file-item" ng-repeat=" item in vm.fileIetm">
+                <img ng-src="img/icon_tab_file1.png">
+                <h2>{{ item.fileName }}</h2>
+                <div ng-click="vm.downloadFile('{{ item.dowloadUrl }}')">下载</div>
+                <p>{{ item.createTime }}</p>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>
