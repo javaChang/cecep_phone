@@ -99,9 +99,10 @@ $list-fontSize: 1.2rem;
                     text-indent: 0;
                     overflow: hidden;
                     text-overflow: ellipsis;
-                    display: -webkit-box;
+                    //display: -webkit-box;
                     -webkit-box-orient: vertical;
                     -webkit-line-clamp: 3;
+                    white-space: nowrap;
 
 
                 }

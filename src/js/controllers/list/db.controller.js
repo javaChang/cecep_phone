@@ -41,44 +41,37 @@
 
 
             if($rootScope.ssoTickey == '' && sessionStorage.getItem('ssoTicket') == '') {
-                // console.log(12);
-                // ns.ready({
-                //     pluginInit: function() {
-                //         ns.runtime.userinfo({
-                //             onSuccess: function(data) {
-                //                 $rootScope.ssoTickey = data.obj.ssoTicket;
-                //                 $rootScope.realName = data.obj.user.realName;
-                //                 $rootScope.userName = data.obj.user.userName;
-                //             },
-                //             onFail: function(msg) {
-                //                 console.log('推送异常：获取ssoTicket失败', JSON.stringify(msg));
-                //                 $ionicLoading.show({
-                //                     template: '推送异常：获取ssoTicket失败',
-                //                     noBackdrop: true,
-                //                     duration: 3000
-                //                 });
-                //             }
-                //         });
-                //     }
-                // });
+                ns.runtime.userinfo({
+                    onSuccess: function(data) {
+                        $rootScope.ssoTickey = data.obj.ssoTicket;
+                        $rootScope.realName = data.obj.user.realName;
+                        $rootScope.userName = data.obj.user.userName;
+                        vm.getDatas();
+                    },
+                    onFail: function(msg) {
+                        console.log('推送异常：获取ssoTicket失败', JSON.stringify(msg));
+                        $ionicLoading.show({
+                            template: '推送异常：获取ssoTicket失败',
+                            noBackdrop: true,
+                            duration: 3000
+                        });
+                    }
+                });
 
             }else {
-                // ns.ready({
-                //     pluginInit: function() {
-                //         ns.runtime.userinfo({
-                //             onSuccess: function(data) {
-                //                 $rootScope.ssoTickey = data.obj.ssoTicket;
-                //                 $rootScope.realName = data.obj.user.realName;
-                //                 $rootScope.userName = data.obj.user.userName;
-                //             },
-                //             onFail: function(msg) {
-                //                 console.log('推送异常：获取ssoTicket失败', JSON.stringify(msg));
-                //                 $ionicLoading.show({
-                //                     template: '推送异常：获取ssoTicket失败',
-                //                     noBackdrop: true,
-                //                     duration: 3000
-                //                 });
-                //             }
+                // ns.runtime.userinfo({
+                //     onSuccess: function(data) {
+                //         $rootScope.ssoTickey = data.obj.ssoTicket;
+                //         $rootScope.realName = data.obj.user.realName;
+                //         $rootScope.userName = data.obj.user.userName;
+                //         vm.getDatas();
+                //     },
+                //     onFail: function(msg) {
+                //         console.log('推送异常：获取ssoTicket失败', JSON.stringify(msg));
+                //         $ionicLoading.show({
+                //             template: '推送异常：获取ssoTicket失败',
+                //             noBackdrop: true,
+                //             duration: 3000
                 //         });
                 //     }
                 // });

@@ -62,7 +62,7 @@
             };
             dataService.post('com.cecic.moa.base.action.RestAction','findDocList',strJson,function (msg) {
                 vm.isActive = true;
-                // console.log(JSON.stringify(msg))
+                console.log(JSON.stringify(msg));
                 vm.code = msg.data.res[0]['h'][0]['code.i'];
 
                 if (vm.code == 0) {

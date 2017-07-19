@@ -1,9 +1,7 @@
 /**
- * 启迪--智慧园区专用
  * @author Hyman <chenhaitao@nationsky.com>
- * @version 2.0.9
+ * @version 2.0.8
  */
-;
 (function(win) {
 	//方法列表
 	var METHODS = [
@@ -49,17 +47,14 @@
 		"runtime.startLightApp", //调起其他应用并传参
 		"runtime.hiddenNavBar", //隐藏原生Title
 		"runtime.camera", //调起相机
-		"runtime.appProfileInfo", //获取轻应用profile配置
-		"runtime.openAPIRequest", //通过openAPI发送请求
-		"runtime.appInfo", //获取当前轻应用信息
-		"runtime.statistics", //发送统计信息
-		"runtime.parkPlatformInfo" //获取园区信息
+		"runtime.appProfileInfo", //获取轻应用profile配置TODO:参数keys是否需要处理非法传参例如''
+		"runtime.openAPIRequest"
 	];
 	var ua = win.navigator.userAgent;
 	var ns = {
-		version: '2.0.9', //框架变化+SDK增加+SDK功能修复更新
+		version: '2.0.8', //框架变化+SDK增加+SDK功能修复更新
 		ios: (/iPhone|iPad|iPod/i).test(ua),
-		android: (/Android/i).test(ua),//TODO:需要改善 dingding
+		android: (/Android/i).test(ua),
 		ready: function(obj) { //TODO:obj是否可以用config方式处理？callBcak呢？参考JQUERY方式
 			var fn = function(bridge, obj) {
 				if(!bridge) {
@@ -86,11 +81,6 @@
 					if(i == 'pluginInit') {
 						bridge.registerHandler("pluginInitFinished", function(data, responseCallback) {
 							obj['pluginInit']();
-						});
-					}
-					if(i == 'init') {
-						bridge.registerHandler("init", function(data, responseCallback) {
-							obj['init'](data);
 						});
 					}
 				}
