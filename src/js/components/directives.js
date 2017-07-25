@@ -48,9 +48,9 @@
                     scope.toggleEvent = function(nodeData,$event,id) {
 
                         if($event.target.style.background.indexOf('lose') >= 0){
-                            $event.target.style.background = 'url(../img/icon-add.png) no-repeat';
+                            $event.target.style.background = 'url(img/icon-add.png) no-repeat';
                         }else{
-                            $event.target.style.background = 'url(../img/icon-lose.png) no-repeat';
+                            $event.target.style.background = 'url(img/icon-lose.png) no-repeat';
                         }
 
 
@@ -127,14 +127,14 @@
                     scope.selectClick = function(text,id,originalCurrentId,$event) {
 
                         if($event.target.style.background.indexOf('selected') >= 0){
-                            $event.target.style.background = 'url(../img/icon-no.png) no-repeat';
+                            $event.target.style.background = 'url(img/icon-no.png) no-repeat';
                             for(var i = 0; i < scope.sourceJson.length ; i++){
                                 if(id == scope.sourceJson[i].id){
                                     scope.sourceJson.splice(i - 1, 1);
                                 }
                             }
                         }else{
-                            $event.target.style.background = 'url(../img/icon-selected.png) no-repeat';
+                            $event.target.style.background = 'url(img/icon-selected.png) no-repeat';
                             var pad = {
                                 'id' : id,
                                 'originalCurrentId' : originalCurrentId,
@@ -147,14 +147,14 @@
                     scope.selectClickRy = function (realName,id,userName,$event) {
 
                         if($event.target.style.background.indexOf('selected') >= 0){
-                            $event.target.style.background = 'url(../img/icon-no.png) no-repeat';
+                            $event.target.style.background = 'url(img/icon-no.png) no-repeat';
                             for(var i = 0; i < scope.sourceJson.length ; i++){
                                 if(id == scope.sourceJson[i].id){
                                     scope.sourceJson.splice(i - 1, 1);
                                 }
                             }
                         }else{
-                            $event.target.style.background = 'url(../img/icon-selected.png) no-repeat';
+                            $event.target.style.background = 'url(img/icon-selected.png) no-repeat';
                             var pad = {
                                 'id' : id,
                                 'realName' : realName,

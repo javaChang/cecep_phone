@@ -46,7 +46,13 @@
                         $rootScope.ssoTickey = data.obj.ssoTicket;
                         $rootScope.realName = data.obj.user.realName;
                         $rootScope.userName = data.obj.user.userName;
-                        vm.getDatas();
+                        if($rootScope.isDetailHref == 'no'){
+                             vm.getDatas();
+                        }else{
+                            $rootScope.isDetailHref = 'no';
+                            $state.go('detail',{'id':$rootScope.detailUrl,'type':$rootScope.detailType,'backUrl':$rootScope.detailBack});     
+                        }
+                        
                     },
                     onFail: function(msg) {
                         console.log('推送异常：获取ssoTicket失败', JSON.stringify(msg));
@@ -64,7 +70,12 @@
                 //         $rootScope.ssoTickey = data.obj.ssoTicket;
                 //         $rootScope.realName = data.obj.user.realName;
                 //         $rootScope.userName = data.obj.user.userName;
-                //         vm.getDatas();
+                //         if($rootScope.isDetailHref == 'no'){
+                //              vm.getDatas();
+                //         }else{
+                //             $rootScope.isDetailHref = 'no';
+                //             $state.go('detail',{'id':$rootScope.detailUrl,'type':$rootScope.detailType,'backUrl':$rootScope.detailBack});     
+                //         }
                 //     },
                 //     onFail: function(msg) {
                 //         console.log('推送异常：获取ssoTicket失败', JSON.stringify(msg));
@@ -91,8 +102,13 @@
                         $rootScope.ssoTickey = msg.data.res[1].b[3]['ssoCertification'][0]['access_token.s'];
                         $rootScope.realName = msg.data.res[1].b[1]['UserAccount'][0]['realName.s'];
                         $rootScope.userName = msg.data.res[1].b[1]['UserAccount'][0]['userName.s'];
-
-                        vm.getDatas();
+                        if($rootScope.isDetailHref == 'no'){
+                             vm.getDatas();
+                        }else{
+                            $rootScope.isDetailHref = 'no';
+                            $state.go('detail',{'id':$rootScope.detailUrl,'type':$rootScope.detailType,'backUrl':$rootScope.detailBack});     
+                        }
+                        
                     } else {
                         $ionicLoading.show({
                             template: '登陆失败！',

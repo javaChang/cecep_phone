@@ -16,7 +16,7 @@
         vm.getDatas = getDatas;
         vm.pathReload = pathReload; // 下拉刷新
         vm.nextPage = nextPage; // 滚动加载
-        // vm.closeApply = closeApply; // 关闭轻应用
+        vm.closeApply = closeApply; // 关闭轻应用
 
         // 调用初始化
         vm.init();
@@ -163,6 +163,10 @@
                     duration: 3000
                 });
             });
+        }
+
+        function closeApply() {
+            window.WebViewJavascriptBridge.callHandler('goBackHome','','');
         }
     }
 })();
