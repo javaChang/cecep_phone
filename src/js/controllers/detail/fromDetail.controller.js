@@ -217,7 +217,7 @@
                         }
 
                         break;
-                    case 'sfrmGongWenSXnew':  //下行发文收文
+                    case 'sfrmGongWenSX':  //下行发文收文
                         if(staut == 'n'){
                             vm.hrefpage = 'fwsw';
                         }else {
@@ -267,7 +267,7 @@
                     default:
                         vm.hrefpage = '';
                 }
-                $rootScope.detailTitle = '部门收文';
+                $rootScope.detailTitle = $rootScope.deptName;
             }
         }
 

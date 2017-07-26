@@ -23,7 +23,7 @@
                             <dd ng-bind="item.column4"></dd>
                         </dt>
 
-                        <dd ng-bind="item.column5"></dd>
+                        <dd ng-bind="item.column5.substring(0,10)"></dd>
                     </dl>
                 </div>
                 <div class="dataAll" ng-show="!vm.disabled" ng-bind="vm.dataTips"></div>

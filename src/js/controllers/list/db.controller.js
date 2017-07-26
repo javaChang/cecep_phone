@@ -17,6 +17,7 @@
         vm.pathReload = pathReload; // 下拉刷新
         vm.nextPage = nextPage; // 滚动加载
         vm.closeApply = closeApply; // 关闭轻应用
+        vm.menuSelect = menuSelect;
 
         // 调用初始化
         vm.init();
@@ -70,6 +71,7 @@
                         $rootScope.ssoTickey = data.obj.ssoTicket;
                         $rootScope.realName = data.obj.user.realName;
                         $rootScope.userName = data.obj.user.userName;
+                        vm.menuSelect();
                         if($rootScope.isDetailHref == 'no'){
                              vm.getDatas();
                         }else{
@@ -102,6 +104,7 @@
                 //         $rootScope.ssoTickey = msg.data.res[1].b[3]['ssoCertification'][0]['access_token.s'];
                 //         $rootScope.realName = msg.data.res[1].b[1]['UserAccount'][0]['realName.s'];
                 //         $rootScope.userName = msg.data.res[1].b[1]['UserAccount'][0]['userName.s'];
+                //         vm.menuSelect();
                 //         if($rootScope.isDetailHref == 'no'){
                 //              vm.getDatas();
                 //         }else{
@@ -250,6 +253,34 @@
         
         function closeApply() {
             window.WebViewJavascriptBridge.callHandler('goBackHome','','');
+        }
+
+        function menuSelect() {
+            var strJson = {
+                'ssoTicket.s':$rootScope.ssoTickey,
+                'userCode.s': $rootScope.userName
+            };
+
+            dataService.post('com.cecic.moa.base.action.RestAction','gwUrl',strJson,function (msg) {
+                vm.menu = true;
+                vm.code = msg.data.res[0]['h'][0]['code.i'];
+                if (vm.code == 0) {
+
+                    $rootScope.deptName = JSON.parse(msg.data.res[1].b[0]['data.s'])[0].menuName;
+                    $rootScope.docDealUrl = JSON.parse(msg.data.res[1].b[0]['data.s'])[0].doc_deal_url;
+                    $rootScope.docEndUrl = JSON.parse(msg.data.res[1].b[0]['data.s'])[0].doc_end_url;
+                    // console.log();
+                } else {
+                    // 模态框
+                    $ionicLoading.show({
+                        template: 'Sorry，数据加载出错！',
+                        noBackdrop: true,
+                        duration: 3000
+                    });
+                }
+            },function (err) {
+
+            });
         }
     }
 })();

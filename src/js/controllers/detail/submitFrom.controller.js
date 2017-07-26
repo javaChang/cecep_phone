@@ -89,8 +89,8 @@
 
             switch (parseInt(vm.extension)){
                 case 1: //提交
-                    vm.assigns = $rootScope.fromDetailJson.assigns;
-                    if(vm.assigns == ''){
+                    // vm.assigns = ;
+                    if($rootScope.fromDetailJson.assigns == ''){
                         $ionicLoading.show({
                             template: '请选择受理人！',
                             noBackdrop: true,
@@ -131,7 +131,7 @@
                 'unid.s': vm.submitData.unid,
                 'dbpath.s': vm.submitData.dataPath,
                 'curuser.s': $rootScope.userName,
-                'nextuser.s': vm.assigns,
+                'nextuser.s': $rootScope.fromDetailJson.assigns,
                 'flownum.s': vm.nextNodeId,
                 'extension.s': vm.extension,
                 'opin.s': JSON.stringify(vm.opinStr)

@@ -23,7 +23,6 @@
          * Date:2017-6-13
          */
         function init() {
-
 		}
 		
 		function menuSelect() {
