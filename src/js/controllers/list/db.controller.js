@@ -40,6 +40,9 @@
             vm.dataTips = '';
 
 
+            // window.WebViewJavascriptBridge.callHandler('progressbar',{'popLoadding':'false'},'');
+
+
 
             if($rootScope.ssoTickey == '' && sessionStorage.getItem('ssoTicket') == '') {
                 ns.runtime.userinfo({
@@ -98,7 +101,7 @@
                 //     // 'password.s': 'lele940329',
                 //     // 'userName.s': 'wangzining1'
                 // };
-                //
+
                 // dataService.post('com.nqsky.meap.api.sso.service.ISsoAPIService', 'login', dataStr, function (msg) {
                 //     if (parseInt(msg.data.res[0].h[0]['code.i']) == 0) {
                 //         $rootScope.ssoTickey = msg.data.res[1].b[3]['ssoCertification'][0]['access_token.s'];
@@ -111,7 +114,7 @@
                 //             $rootScope.isDetailHref = 'no';
                 //             $state.go('detail',{'id':$rootScope.detailUrl,'type':$rootScope.detailType,'backUrl':$rootScope.detailBack});
                 //         }
-                //
+
                 //     } else {
                 //         $ionicLoading.show({
                 //             template: '登陆失败！',
@@ -120,7 +123,7 @@
                 //         });
                 //     }
                 // }, function (err) {
-                //
+
                 // });
 
                 if ($rootScope.ssoTicket == '') {

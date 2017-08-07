@@ -9,8 +9,9 @@
         </div>
         <div class="do-box" ng-if="vm.selectDiv == true">
             <div class="do-form do-form-select" data-tap-disabled=”true”>
-                <select ng-init="vm.selectedName = vm.selectDate[0]" ng-change="vm.infoChange()" ng-model="vm.selectedName" ng-options="x for x in vm.selectDate">
-                </select>
+                <div class="do-from-div-select " ng-click="vm.sheetShow()" ng-bind="vm.selData" ></div>
+                <!-- <select ng-init="vm.selectedName = vm.selectDate[0]" ng-change="vm.infoChange()" ng-model="vm.selectedName" ng-options="x for x in vm.selectDate">
+                </select> -->
             </div>
             <div class="do-form">
                 <textarea rows="2" placeholder="请填写意见" ng-model="vm.selData" ></textarea>

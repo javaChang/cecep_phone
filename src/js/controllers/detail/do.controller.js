@@ -5,19 +5,20 @@
 		.module('app')
 		.controller('DoCtrl', DoCtrl);
 
-    DoCtrl.$inject = ['$scope', '$rootScope','dataService','$ionicTabsDelegate','$state','$ionicLoading'];
-	function DoCtrl($scope, $rootScope,dataService,$ionicTabsDelegate,$state,$ionicLoading) {
+    DoCtrl.$inject = ['$scope', '$rootScope','dataService','$ionicTabsDelegate','$state','$ionicLoading','$ionicActionSheet'];
+	function DoCtrl($scope, $rootScope,dataService,$ionicTabsDelegate,$state,$ionicLoading,$ionicActionSheet) {
 		var vm = this;
 
         vm.init = init; // 初始化函数
 		vm.infoChange = infoChange; // 审批意见
-        vm.selectDate = ['请选择','不同意','通过','同意','已阅']; //当意见为空时处理
+        vm.selectDate = ['不同意','通过','同意','已阅']; //当意见为空时处理
         vm.selectDiv = true; //意见栏是否显示
         vm.selectFlow = selectFlow; //选择提交流程
         vm.actionDocument = actionDocument; //提交
         vm.backPage = backPage; //返回指定列表
         vm.docmentBtn = true; //判断是否有意见
         vm.jsonArryString = jsonArryString; //由于后台无法处理数组，需要将数组转换为字符串
+        vm.sheetShow = sheetShow; //下拉框
         vm.detailRow = '';
         vm.selDat = '';
         vm.opinJson = '';
@@ -35,7 +36,7 @@
             vm.detialTitle = $rootScope.detailTitle;
 
         	if($rootScope.selectOptions != ''){
-                $rootScope.selectOptions.unshift('请选择');
+                // $rootScope.selectOptions.unshift('请选择');
                 vm.selectDate = $rootScope.selectOptions;
 			}
 
@@ -233,6 +234,32 @@
                     }
                 }
                 return data;
+        }
+
+
+        function sheetShow(){
+            var actionSheetJson = [];
+           for(var i = 0; i < vm.selectDate.length ; i++ ){
+                var  buttonsText = {
+                    'text':vm.selectDate[i]
+                };
+                actionSheetJson.push(buttonsText);
+           }
+
+
+           var hideSheet = $ionicActionSheet.show({
+                 buttons: actionSheetJson,
+                 titleText: '请选择',
+                 cancelText: '取消',
+                 cancel: function() {
+
+                      // add cancel code..
+                 },
+                 buttonClicked: function(index) {
+                    vm.selData = actionSheetJson[index].text;
+                   return true;
+                 }
+             });
         }
 
         function backPage() {

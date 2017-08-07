@@ -235,6 +235,20 @@
         };
     }
 }
+
+
+.do-from-div-select {
+    line-height: 100px;
+        height: 100px;
+        width: 100%;
+        font-size: 28px;
+        padding: {
+            left: 40px;
+            right: 28px;
+        };
+}
+
+
 .do-form-select:after {
     float: right;
     display: block;

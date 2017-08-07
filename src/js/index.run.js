@@ -14,7 +14,7 @@
             ns.ready();
 		}
 		$rootScope.isDetailHref = 'no';
-		var a = GetUrlParms(window.location.href);
+		var a = getUrlParms(window.location.href);
 		if(a != null){
 			$rootScope.detailUrl = a.url;
 			$rootScope.detailBack = 'db';
@@ -24,7 +24,7 @@
 	}
 
 	// 获取android端传递过来的URL中获取数据
-	function GetUrlParms(url) {
+	function getUrlParms(url) {
 	 	var args = new Object(); 
 	 	if(url.indexOf('?') < 0){
 	 		return null;
