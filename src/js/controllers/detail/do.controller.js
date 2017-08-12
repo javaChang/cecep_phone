@@ -176,7 +176,12 @@
                 // console.log(JSON.stringify(msg));
                 if(parseInt(msg.data.res[0].h[0]['code.i']) == 0){
 
-                    $rootScope.actionDocument = JSON.parse(JSON.parse(msg.data.res[1].b[0]['data.s']).result);
+                    try{
+                        $rootScope.actionDocument = JSON.parse(JSON.parse(msg.data.res[1].b[0]['data.s']).result);
+                    } catch (e) {
+                        $rootScope.actionDocument = JSON.parse(msg.data.res[1].b[0]['data.s']).result;
+                        console.log(e)
+                    }
                     //流程结束
                     if(parseInt(vm.detailRow) == 9999){
                         $state.go('main.' + $rootScope.backUrl);
