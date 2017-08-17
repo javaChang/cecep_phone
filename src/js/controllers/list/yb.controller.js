@@ -17,6 +17,7 @@
         vm.pathReload = pathReload; // 下拉刷新
         vm.nextPage = nextPage; // 滚动加载
         vm.closeApply = closeApply; // 关闭轻应用
+        vm.detailHref = detailHref;
 
         // 调用初始化
         vm.init();
@@ -27,15 +28,12 @@
          * Date:2017-6-13
          */
         function init() {
-
+            window.WebViewJavascriptBridge.callHandler('progressbar',{'popLoadding':'true'},'');
             vm.listItem = null;
-            vm.name = '查看列表';
-            // vm.imgUrl = imgUrl;
             vm.disabled = true; // 滚动加载开关
             vm.startRows = 0; // 数据起始值
             vm.rowsCount = 1; // 滚动加载次数
             vm.pageSize = 10; // 请求数据每页条数
-            vm.isActive = false; // 数据加载loading是否显示
             vm.dataTips = '';
 
             vm.getDatas();
@@ -62,7 +60,7 @@
                 'size.s': vm.pageSize
             };
             dataService.post('com.cecic.moa.base.action.RestAction','findDocList',strJson,function (msg) {
-                vm.isActive = true;
+                window.WebViewJavascriptBridge.callHandler('progressbar',{'popLoadding':'false'},'');
                 // console.log(JSON.stringify(msg));
                 vm.code = msg.data.res[0]['h'][0]['code.i'];
 
@@ -93,7 +91,7 @@
                 }
                 $scope.$broadcast('scroll.refreshComplete');
             }, function(err) {
-                vm.isActive = true;
+                window.WebViewJavascriptBridge.callHandler('progressbar',{'popLoadding':'false'},'');
                 // 模态框
                 $ionicLoading.show({
                     template: '网络连接错误',
@@ -167,6 +165,20 @@
 
         function closeApply() {
             window.WebViewJavascriptBridge.callHandler('goBackHome','','');
+        }
+
+        function detailHref(id,type,backUrl){
+            // console.log(id+'_'+type+'_'+backUrl);
+            //返回标识
+            $rootScope.backUrl = backUrl;
+            //表单ID
+            $rootScope.fromId = id;
+            //表单类型
+            $rootScope.typeFrom = type;
+            //是否请求数据
+            $rootScope.isAjax = 'yes';
+
+            $state.go('detail');
         }
     }
 })();

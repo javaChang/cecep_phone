@@ -182,8 +182,8 @@
         letter-spacing: 0;
         line-height: 50px;
         margin:{
-               top: -30px;
-               left: 130px;
+               top: -36px;
+               left: 150px;
         }
 
     }
@@ -270,6 +270,7 @@
 
 .row {
     margin-top: -30px;
+    margin-left: -15px;
 }
 .col-50 {
     //opacity: 0.5;
@@ -277,7 +278,7 @@
     border: 2px solid #029BEA;
     border-radius: 8px;
     font-family: PingFangSC-Regular;
-    font-size: 32px;
+    font-size: 28px;
     color: #666666;
     letter-spacing: 0;
     line-height: 32px;
@@ -290,7 +291,7 @@
 
 .col-50-action {
     background: #029BEA;
-    font-size: 32px;
+    font-size: 28px;
     color: #FFFFFF;
     letter-spacing: 0;
     line-height: 32px;
@@ -330,6 +331,7 @@
     letter-spacing: 0;
     text-align:justify;
     text-align-last:justify;
+    margin-left: 20px;
     &:after {
         position: absolute;
         content:'：';

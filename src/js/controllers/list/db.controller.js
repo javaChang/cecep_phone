@@ -18,6 +18,7 @@
         vm.nextPage = nextPage; // 滚动加载
         vm.closeApply = closeApply; // 关闭轻应用
         vm.menuSelect = menuSelect;
+        vm.detailHref = detailHref;
 
         // 调用初始化
         vm.init();
@@ -30,17 +31,14 @@
         function init() {
 
             vm.listItem = null;
-            vm.name = '查看列表';
-            // vm.imgUrl = imgUrl;
             vm.disabled = true; // 滚动加载开关
             vm.startRows = 0; // 数据起始值
             vm.rowsCount = 1; // 滚动加载次数
             vm.pageSize = 10; // 请求数据每页条数
-            vm.isActive = false; // 数据加载loading是否显示
             vm.dataTips = '';
 
 
-            // window.WebViewJavascriptBridge.callHandler('progressbar',{'popLoadding':'false'},'');
+            window.WebViewJavascriptBridge.callHandler('progressbar',{'popLoadding':'true'},'');
 
 
 
@@ -74,12 +72,13 @@
                 //         $rootScope.ssoTickey = data.obj.ssoTicket;
                 //         $rootScope.realName = data.obj.user.realName;
                 //         $rootScope.userName = data.obj.user.userName;
+                //         $rootScope.company = data.obj.user.company;
                 //         vm.menuSelect();
                 //         if($rootScope.isDetailHref == 'no'){
                 //              vm.getDatas();
                 //         }else{
                 //             $rootScope.isDetailHref = 'no';
-                //             $state.go('detail',{'id':$rootScope.detailUrl,'type':$rootScope.detailType,'backUrl':$rootScope.detailBack});
+                //             vm.detailHref($rootScope.detailUrl,$rootScope.detailType,$rootScope.detailBack);
                 //         }
                 //     },
                 //     onFail: function(msg) {
@@ -96,23 +95,26 @@
                     'agencyCode.s': '001',
                     // 'password.s': 'sc123456',
                     // 'userName.s': 'danchun'
-                    // 'password.s': '1234qwer',
-                    // 'userName.s': 'mengweiqiang'
-                    'password.s': 'lele940329',
-                    'userName.s': 'wangzining1'
+                    // 'password.s': 'yangxing123',
+                    // 'userName.s': 'yangxing1'
+                    'password.s': '1234qwer',
+                    'userName.s': 'mengweiqiang'
+                    // 'password.s': 'lele940329',
+                    // 'userName.s': 'wangzining1'
                 };
 
                 dataService.post('com.nqsky.meap.api.sso.service.ISsoAPIService', 'login', dataStr, function (msg) {
                     if (parseInt(msg.data.res[0].h[0]['code.i']) == 0) {
-                        $rootScope.ssoTickey = msg.data.res[1].b[3]['ssoCertification'][0]['access_token.s'];
+                        $rootScope.ssoTickey = msg.data.res[1].b[4]['ssoCertification'][0]['access_token.s'];
                         $rootScope.realName = msg.data.res[1].b[1]['UserAccount'][0]['realName.s'];
                         $rootScope.userName = msg.data.res[1].b[1]['UserAccount'][0]['userName.s'];
+                        $rootScope.company = msg.data.res[1].b[3]['company'][0]['company.s'];
                         vm.menuSelect();
                         if($rootScope.isDetailHref == 'no'){
                              vm.getDatas();
                         }else{
                             $rootScope.isDetailHref = 'no';
-                            $state.go('detail',{'id':$rootScope.detailUrl,'type':$rootScope.detailType,'backUrl':$rootScope.detailBack});
+                            vm.detailHref($rootScope.detailUrl,$rootScope.detailType,$rootScope.detailBack);
                         }
 
                     } else {
@@ -151,8 +153,7 @@
                 'size.s': vm.pageSize
             };
             dataService.post('com.cecic.moa.base.action.RestAction','findDocList',strJson,function (msg) {
-                vm.isActive = true;
-
+                window.WebViewJavascriptBridge.callHandler('progressbar',{'popLoadding':'false'},'');
                 vm.code = msg.data.res[0]['h'][0]['code.i'];
 
                 if (vm.code == 0) {
@@ -182,7 +183,7 @@
                 }
                 $scope.$broadcast('scroll.refreshComplete');
             }, function(err) {
-                vm.isActive = true;
+                window.WebViewJavascriptBridge.callHandler('progressbar',{'popLoadding':'false'},'');
                 // 模态框
                 $ionicLoading.show({
                     template: '网络连接错误',
@@ -256,6 +257,20 @@
         
         function closeApply() {
             window.WebViewJavascriptBridge.callHandler('goBackHome','','');
+        }
+
+        function detailHref(id,type,backUrl){
+            // console.log(id+'_'+type+'_'+backUrl);
+            //返回标识
+            $rootScope.backUrl = backUrl;
+            //表单ID
+            $rootScope.fromId = id;
+            //表单类型
+            $rootScope.typeFrom = type;
+            //是否请求数据
+            $rootScope.isAjax = 'yes';
+
+            $state.go('detail');
         }
 
         function menuSelect() {

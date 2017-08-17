@@ -3,7 +3,10 @@
     <ion-nav-buttons side="left">
         <button class="button button-icon icon ion-ios-arrow-back" ng-click="vm.backPage()"> 返回</button>
     </ion-nav-buttons>
-    <ion-content overflow-scrolling="false" class="detail-view-content">
+    <ion-nav-buttons side="right">
+        <button class="button button-icon" ui-sref="detailMore"> 更多</button>
+    </ion-nav-buttons>
+    <ion-content overflow-scrolling="false">
         <div class="detail-process-div" ng-if="vm.selectDiv == true">
             <span>办理意见</span>
         </div>

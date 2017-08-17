@@ -11,7 +11,7 @@
                 <div class="list-default" ng-if="vm.listItem.length == 0">
                     暂无内容
                 </div>
-                <div class="list-content" ng-repeat="item in vm.listItem" ng-if="vm.listItem.length > 0" ui-sref="detail({id:item.href,type:item.column7,backUrl:'dy'})">
+                <div class="list-content" ng-repeat="item in vm.listItem" ng-if="vm.listItem.length > 0" ng-click="vm.detailHref('{{item.href}}','{{item.column7}}','dy')">
                     <h3 ng-bind="item.column2"></h3>
                     <dl>
                         <dt ><img src="img/icon-user.png">
@@ -31,5 +31,4 @@
             <ion-infinite-scroll ng-if="vm.disabled" on-infinite="vm.nextPage()"  distance="1%" immediate-check="false"></ion-infinite-scroll>
         </div>
     </ion-content>
-    <div class="loading-mask" ng-class="{true:'loading-mask active', false:'loading-mask'}[vm.isActive]"></div>
 </ion-view>

@@ -28,7 +28,10 @@
 		}
 
         function backPage() {
-            $state.go('main.' + $rootScope.backUrl);
+             //是否请求数据
+            $rootScope.isAjax = 'no';
+
+            $state.go('detail');
         }
 	}
 })();

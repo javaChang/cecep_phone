@@ -12,7 +12,7 @@
 }
 
 .bar-light .button {
-    color: #fff ;
+    color: #fff !important;
 }
 
 .bar-nav-img {
@@ -203,4 +203,8 @@
         display: inline-block;
         background: url('../img/icon-peo.png') no-repeat center center;
     }
+}
+
+.col {
+    padding:0px;
 }

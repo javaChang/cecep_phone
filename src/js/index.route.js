@@ -59,8 +59,7 @@
                     }
                 })
                 .state('detail', {
-                    url: '/detail/:id/:type/:backUrl',
-                    // params:{'id':'','type':'','backUrl':''},
+                    url: '/detail',
                     templateUrl: 'template/detail.html',
                     controller: 'DetailCtrl',
                     cache: false ,
@@ -69,7 +68,7 @@
                 .state('detail.detailFrom', {
                     url: '/detailFrom',
                     views : {
-                        'tab-detail-table' : {
+                        'tab-detailFrom' : {
                             templateUrl : 'template/detail/fromDetail.html',
                             controller: 'FromDetailCtrl',
                             cache: false ,
@@ -80,42 +79,9 @@
                 .state('detail.fileList', {
                     url: '/fileList',
                     views : {
-                        'tab-detail-table' : {
+                        'tab-fileList' : {
                             templateUrl : 'template/detail/fileList.html',
                             controller: 'FileListCtrl',
-                            cache: false ,
-                            controllerAs: 'vm'
-                        }
-                    }
-                })
-                .state('detail.history', {
-                    url: '/history',
-                    views : {
-                        'tab-detail-table' : {
-                            templateUrl : 'template/detail/history.html',
-                            controller: 'HistoryCtrl',
-                            cache: false ,
-                            controllerAs: 'vm'
-                        }
-                    }
-                })
-                .state('detail.process', {
-                    url: '/process',
-                    views : {
-                        'tab-detail-table' : {
-                            templateUrl : 'template/detail/process.html',
-                            controller: 'ProcessCtrl',
-                            cache: false ,
-                            controllerAs: 'vm'
-                        }
-                    }
-                })
-                .state('detail.record', {
-                    url: '/record',
-                    views : {
-                        'tab-detail-table' : {
-                            templateUrl : 'template/detail/record.html',
-                            controller: 'RecordCtrl',
                             cache: false ,
                             controllerAs: 'vm'
                         }
@@ -124,14 +90,55 @@
                 .state('detail.do', {
                     url: '/do',
                     views : {
-                        'tab-detail-table' : {
-                            templateUrl : 'template/detail/do.html',
+                        'tab-do' : {
+                             templateUrl : 'template/detail/do.html',
                             controller: 'DoCtrl',
                             cache: false ,
                             controllerAs: 'vm'
                         }
                     }
                 })
+                .state('detailMore', {
+                    url: '/detailMore',
+                    templateUrl: 'template/detailMore.html',
+                    controller: 'DetailMoreCtrl',
+                    cache: false ,
+                    controllerAs: 'vm'
+                })
+                .state('detailMore.history', {
+                    url: '/history',
+                    views : {
+                        'tab-history' : {
+                            templateUrl : 'template/detail/history.html',
+                            controller: 'HistoryCtrl',
+                            cache: false ,
+                            controllerAs: 'vm'
+                        }
+                    }
+                })
+                .state('detailMore.process', {
+                    url: '/process',
+                    views : {
+                        'tab-process' : {
+                            templateUrl : 'template/detail/process.html',
+                            controller: 'ProcessCtrl',
+                            cache: false ,
+                            controllerAs: 'vm'
+                        }
+                    }
+                })
+                .state('detailMore.record', {
+                    url: '/record',
+                    views : {
+                        'tab-record' : {
+                            templateUrl : 'template/detail/record.html',
+                            controller: 'RecordCtrl',
+                            cache: false ,
+                            controllerAs: 'vm'
+                        }
+                    }
+                })
+
                 .state('submitFrom', {
                     url: '/submitFrom/:submitType',
                     templateUrl: 'template/detail/submitFrom.html',

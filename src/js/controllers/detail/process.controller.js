@@ -28,12 +28,13 @@
         	vm.DocumentAuthors = ($rootScope.DocumentAuthors).join(',');
         	vm.stat = $rootScope.stat;
         	vm.processList = $rootScope.historyEntities;
-
-			// console.log(JSON.stringify($rootScope.historyEntities));
 		}
 
         function backPage() {
-            $state.go('main.' + $rootScope.backUrl);
+             //是否请求数据
+            $rootScope.isAjax = 'no';
+
+            $state.go('detail');
         }
 	}
 })();

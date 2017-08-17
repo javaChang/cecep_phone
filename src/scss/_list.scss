@@ -18,7 +18,7 @@ $list-fontSize: 1.2rem;
 }
 .tab-item-active{
     color: #029BEA !important;
-    border-bottom:solid 2px #029BEA;
+    border-bottom:solid 2px #029BEA !important;
     /*box-shadow:0 -3px 8px #C1D3F0 inset;*/
 }
 .tab-item .icon {

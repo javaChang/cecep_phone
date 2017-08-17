@@ -3,7 +3,10 @@
     <ion-nav-buttons side="left">
         <button class="button button-icon icon ion-ios-arrow-back" ng-click="vm.backPage()"> 返回</button>
     </ion-nav-buttons>
-    <ion-content overflow-scrolling="false" class="detail-view-content">
+    <ion-nav-buttons side="right">
+        <button class="button button-icon" ui-sref="detailMore"> 更多</button>
+    </ion-nav-buttons>
+    <ion-content overflow-scrolling="false">
         <!-- 签报 -->
         <div ng-if="vm.fromType == 'jtqb'">
             <ul class="list detail-from">
@@ -984,5 +987,4 @@
 
 
     </ion-content>
-    <div class="loading-mask" ng-class="{true:'loading-mask active', false:'loading-mask'}[vm.isActive]"></div>
 </ion-view>

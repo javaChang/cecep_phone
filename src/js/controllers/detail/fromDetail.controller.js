@@ -14,7 +14,6 @@
         vm.isActive = false; // 数据加载loading是否显示
 		vm.hrefDetail = hrefDetail; //判断展示表单
 		vm.backPage = backPage; //返回指定列表
-        vm.detailFromJson = detailFromJson;
         vm.agencyId = 'agency1';
         vm.tissueType = '0';
         vm.popupScope = popupScope;
@@ -30,8 +29,7 @@
          * Date:2017-6-13
          */
         function init() {
-
-			detailFromSelect();
+            window.WebViewJavascriptBridge.callHandler('progressbar',{'popLoadding':'true'},'');
             vm.hrefDetail($rootScope.fromId,'n');
             vm.detialTitle = $rootScope.detailTitle;
 
@@ -45,12 +43,12 @@
             };
 
             dataService.post('com.cecic.moa.sign.action.SignAction','findGsign',strJson,function (msg) {
-
-                vm.isActive = true;
-
+                window.WebViewJavascriptBridge.callHandler('progressbar',{'popLoadding':'false'},'');
                 if (parseInt(msg.data.res[0].h[0]['code.i']) == 0) {
 
                     var detailJson = JSON.parse(msg.data.res[1].b[0]['data.s']);
+
+                    $rootScope.detailfrom = detailJson;
                     //正文/附件
                     $rootScope.fiels = detailJson.fiels == undefined ? '' : detailJson.fiels;
 
@@ -94,7 +92,7 @@
                 }
 
             },function (err) {
-                vm.isActive = true;
+                window.WebViewJavascriptBridge.callHandler('progressbar',{'popLoadding':'false'},'');
                 // 模态框
                 $ionicLoading.show({
                     template: 'Sorry，数据加载出错！',
@@ -106,168 +104,178 @@
         
         
         function hrefDetail(id,staut) {
-        	vm.hrefpage = '';
-            if(id.indexOf('qsbg_1.nsf') > 1){
-                if(staut == 'n'){
-                    vm.hrefpage = 'jtqb';
-                    $rootScope.detailTitle = '集团签报';
-                }else{
-                    $rootScope.fromDetailJson = {
-                        'fldSubject': vm.detailfrom.fldSubject,
-                        'Fldfwbh': vm.detailfrom.Fldfwbh,
-                        'fldcsld': vm.detailfrom.fldcsld ,
-                        'Fldjinji': vm.detailfrom.Fldjinji,
-                        'fldNiGaoDW': vm.detailfrom.fldNiGaoDW,
-                        'fldNiGaoRen': vm.detailfrom.fldNiGaoRen,
-                        'fldQiCaoRQ': vm.detailfrom.fldQiCaoRQ,
-                        'fldDh': vm.detailfrom.fldDh,
-                        'fldZhuSongDW': vm.detailfrom.fldZhuSongDW,
-                        'fldZhuSongDW_id': vm.detailfrom.fldZhuSongDW_id,
-                        'fldYueZhiBM': vm.detailfrom.fldYueZhiBM,
-                        'fldYueZhiBM_id': vm.detailfrom.fldYueZhiBM_id,
-                        'fldYueZhiRy': vm.detailfrom.fldYueZhiRy,
-                        'fldSwBeiZhu': vm.detailfrom.fldSwBeiZhu.data
-                    };
-                }
 
-
-            }else if(id.indexOf('swgl_1.nsf') > 1){   //集团收文
-                vm.hrefpage = 'jtsw';
-                $rootScope.detailTitle = '集团收文';
-
-            }else if(id.indexOf('fwgl_1.nsf') > 1){  //集团发文
-                if(staut == 'n'){
-                    vm.hrefpage = 'jtfw';
-                    $rootScope.detailTitle = '集团发文';
-                }else {
-                    $rootScope.fromDetailJson = {
-                        'Fldfwbh': vm.detailfrom.Fldfwbh,
-                        'Fldjinji': vm.detailfrom.Fldjinji,
-                        'fldSubject': vm.detailfrom.fldSubject,
-                        'fldZhuSongDW_fw': vm.detailfrom.fldZhuSongDW_fw,
-                        'fldChaoSongDW_fw': vm.detailfrom.fldChaoSongDW_fw,
-                        'fldFaSongRY': vm.detailfrom.fldFaSongRY,
-                        'fldNiGaoDW': vm.detailfrom.fldNiGaoDW,
-                        'fldNiGaoRen': vm.detailfrom.fldNiGaoRen,
-                        'fldQiCaoRQ': vm.detailfrom.fldQiCaoRQ,
-                        'fldFaWenRQ': vm.detailfrom.fldFaWenRQ,
-                        'fldQianFaLD': vm.detailfrom.fldQianFaLD,
-                        'fldHuiQian': vm.detailfrom.fldHuiQian,
-                        'fldHuiQian_id': vm.detailfrom.fldHuiQian_id,
-                        'fldSwBeiZhu': vm.detailfrom.fldSwBeiZhu.data
-                    };
-                }
-            }else if(id.indexOf('jthyjy_1.nsf') > 1){  //会议纪要
-                vm.hrefpage = 'jthyjy';
-                $rootScope.detailTitle = '会议纪要';
-            }else if(id.indexOf('xbd_1.nsf') > 1){ //协办单
-                vm.hrefpage = 'xbd';
-                $rootScope.detailTitle = '集团协办单';
-            }else if(id.indexOf('qtwj_1.nsf') > 1){ //白头文
-                vm.hrefpage = 'qtwj';
-                $rootScope.detailTitle = '集团白头文';
-            }else{
-                switch($rootScope.typeFrom){
-                    case 'sfrmGongWenSXQb':  //签报收文
-                        if(staut == 'n'){
-                            vm.hrefpage = 'qbsw';
-                        }else {
-                            $rootScope.fromDetailJson = {
+            switch(id.split('/')[5]){
+                case 'qsbg_1.nsf':
+                    if(staut == 'n'){
+                        vm.hrefpage = 'jtqb';
+                        $rootScope.detailTitle = '集团签报';
+                    }else{
+                        $rootScope.fromDetailJson = {
+                            'fldSubject': vm.detailfrom.fldSubject,
+                            'Fldfwbh': vm.detailfrom.Fldfwbh,
+                            'fldcsld': vm.detailfrom.fldcsld ,
+                            'Fldjinji': vm.detailfrom.Fldjinji,
+                            'fldNiGaoDW': vm.detailfrom.fldNiGaoDW,
+                            'fldNiGaoRen': vm.detailfrom.fldNiGaoRen,
+                            'fldQiCaoRQ': vm.detailfrom.fldQiCaoRQ,
+                            'fldDh': vm.detailfrom.fldDh,
+                            'fldZhuSongDW': vm.detailfrom.fldZhuSongDW,
+                            'fldZhuSongDW_id': vm.detailfrom.fldZhuSongDW_id,
+                            'fldYueZhiBM': vm.detailfrom.fldYueZhiBM,
+                            'fldYueZhiBM_id': vm.detailfrom.fldYueZhiBM_id,
+                            'fldYueZhiRy': vm.detailfrom.fldYueZhiRy,
+                            'fldSwBeiZhu': vm.detailfrom.fldSwBeiZhu.data
+                        };
+                    }
+                    break;
+                case 'swgl_1.nsf': //集团收文
+                    break;
+                case 'fwgl_1.nsf': //集团发文
+                    if(staut == 'n'){
+                        vm.hrefpage = 'jtfw';
+                        $rootScope.detailTitle = '集团发文';
+                    }else {
+                        $rootScope.fromDetailJson = {
+                            'Fldfwbh': vm.detailfrom.Fldfwbh,
+                            'Fldjinji': vm.detailfrom.Fldjinji,
+                            'fldSubject': vm.detailfrom.fldSubject,
+                            'fldZhuSongDW_fw': vm.detailfrom.fldZhuSongDW_fw,
+                            'fldChaoSongDW_fw': vm.detailfrom.fldChaoSongDW_fw,
+                            'fldFaSongRY': vm.detailfrom.fldFaSongRY,
+                            'fldNiGaoDW': vm.detailfrom.fldNiGaoDW,
+                            'fldNiGaoRen': vm.detailfrom.fldNiGaoRen,
+                            'fldQiCaoRQ': vm.detailfrom.fldQiCaoRQ,
+                            'fldFaWenRQ': vm.detailfrom.fldFaWenRQ,
+                            'fldQianFaLD': vm.detailfrom.fldQianFaLD,
+                            'fldHuiQian': vm.detailfrom.fldHuiQian,
+                            'fldHuiQian_id': vm.detailfrom.fldHuiQian_id,
+                            'fldSwBeiZhu': vm.detailfrom.fldSwBeiZhu.data
+                        };
+                    }
+                    break;
+                case 'jthyjy_1.nsf': //会议纪要
+                    vm.hrefpage = 'jthyjy';
+                    $rootScope.detailTitle = '会议纪要';
+                    break;
+                case 'xbd_1.nsf': //协办单
+                    vm.hrefpage = 'xbd';
+                    $rootScope.detailTitle = '集团协办单';
+                    break;
+                case 'qtwj_1.nsf': //白头文
+                    vm.hrefpage = 'qtwj';
+                    $rootScope.detailTitle = '集团白头文';
+                    break;
+                default:
+                    switch($rootScope.typeFrom){
+                        case 'sfrmGongWenSXQb':  //签报收文
+                            if(staut == 'n'){
+                                vm.hrefpage = 'qbsw';
+                            }else {
+                                $rootScope.fromDetailJson = {
+                                        'fldSubject' : vm.detailfrom.fldSubject,
+                                        'fldFwbh' : vm.detailfrom.fldFwbh,
+                                        'fldJinJi' : vm.detailfrom.fldJinJi,
+                                        'fldQiXian' : vm.detailfrom.fldQiXian,
+                                        'fldcsld' : vm.detailfrom.fldcsld,
+                                        'fldNiGaoDW' : vm.detailfrom.fldNiGaoDW,
+                                        'fldNiGaoDW_id' : vm.detailfrom.fldNiGaoDW_id,
+                                        'fldNiGaoRen' : vm.detailfrom.fldNiGaoRen,
+                                        'fldQiCaoRQ' : vm.detailfrom.fldQiCaoRQ,
+                                        'fldDh' : vm.detailfrom.fldDh,
+                                        'fldYueZhiBM' : vm.detailfrom.fldYueZhiBM,
+                                        'fldYueZhiBM_id' : vm.detailfrom.fldYueZhiBM_id,
+                                        'fldQianFaLD' : vm.detailfrom.fldQianFaLD,
+                                        'fldZhuSongDW' : vm.detailfrom.fldZhuSongDW,
+                                        'fldZhuSongDW_id' : vm.detailfrom.fldZhuSongDW_id
+                                };
+                            }
+                            break;
+                        case 'sfrmGongWenSXFw':  //发文会签收文
+                            if(staut == 'n'){
+                                vm.hrefpage = 'fwhq';
+                            }else {
+                                $rootScope.fromDetailJson = {
                                     'fldSubject' : vm.detailfrom.fldSubject,
                                     'fldFwbh' : vm.detailfrom.fldFwbh,
                                     'fldJinJi' : vm.detailfrom.fldJinJi,
-                                    'fldQiXian' : vm.detailfrom.fldQiXian,
-                                    'fldcsld' : vm.detailfrom.fldcsld,
+                                    'fldFwxh' : vm.detailfrom.fldFwxh,
+                                    'fldZhuSongDW_fw' : vm.detailfrom.fldZhuSongDW_fw,
+                                    'fldZhuSongDW_id' : vm.detailfrom.fldZhuSongDW_id,
+                                    'fldChaoSong_disp' : vm.detailfrom.fldChaoSong_disp,
+                                    'fldChaoSong_id' : vm.detailfrom.fldChaoSong_id,
                                     'fldNiGaoDW' : vm.detailfrom.fldNiGaoDW,
-                                    'fldNiGaoDW_id' : vm.detailfrom.fldNiGaoDW_id,
+                                    'fldQiCaoRQ' : vm.detailfrom.fldQiCaoRQ,
+                                    'fldNiGaoRen' : vm.detailfrom.fldNiGaoRen,
+                                    'fldHeGao' : vm.detailfrom.fldHeGao,
+                                    'fldJiaoDui_1' : vm.detailfrom.fldJiaoDui_1,
+                                    'fldFaWenRQ' : vm.detailfrom.fldFaWenRQ,
+                                    'fldQianFaLD' : vm.detailfrom.fldQianFaLD,
+                                    'fldHuiQian' : vm.detailfrom.fldHuiQian,
+                                    'fldHuiQian_id' : vm.detailfrom.fldHuiQian_id
+                                };
+                            }
+
+                            break;
+                        case 'sfrmGongWenSX':  //下行发文收文
+                            if(staut == 'n'){
+                                vm.hrefpage = 'fwsw';
+                            }else {
+                                $rootScope.fromDetailJson = {
+                                    'fldSubject' : vm.detailfrom.fldSubject,
+                                    'fldFwbh' : vm.detailfrom.fldFwbh,
+                                    'fldJinJi' : vm.detailfrom.fldJinJi,
+                                    'fldLwjg' : vm.detailfrom.fldLwjg,
+                                    'fldswrq' : vm.detailfrom.fldswrq,
+                                    'fldLwzh' : vm.detailfrom.fldLwzh,
+                                    'fldswlx' : vm.detailfrom.fldswlx,
+                                    'fldFaSongRY' : vm.detailfrom.fldFaSongRY,
+                                    'fldZhuSongDW' : vm.detailfrom.fldZhuSongDW,
+                                    'fldZhuSongDW_id' : vm.detailfrom.fldZhuSongDW_id,
+                                    'fldChaoSong' : vm.detailfrom.fldChaoSong,
+                                    'fldChaoSong_id' : vm.detailfrom.fldChaoSong_id,
+                                    'fldYueZhi' : vm.detailfrom.fldYueZhi,
+                                    'fldYueZhi_id' : vm.detailfrom.fldYueZhi_id,
+                                    'fldSbsx' : vm.detailfrom.fldSbsx,
+                                    'fldWcsx' : vm.detailfrom.fldWcsx,
+                                    'fldCyFw' : vm.detailfrom.fldCyFw
+                                };
+                            }
+                            break;
+                        case 'sfrmBtw':  //白头文收文
+                            vm.hrefpage = 'btw';
+                            break;
+                        case 'sfrmgaozhiXbd':  //协办单收文
+
+                            if(staut == 'n'){
+                                vm.hrefpage = 'xbdsw';
+                            }else {
+                                $rootScope.fromDetailJson = {
+                                    'fldFwbh' : vm.detailfrom.fldFwbh,
+                                    'fldSubject' : vm.detailfrom.fldSubject,
+                                    'fldJinJi' : vm.detailfrom.fldJinJi,
+                                    'fldNiGaoDW' : vm.detailfrom.fldNiGaoDW,
                                     'fldNiGaoRen' : vm.detailfrom.fldNiGaoRen,
                                     'fldQiCaoRQ' : vm.detailfrom.fldQiCaoRQ,
                                     'fldDh' : vm.detailfrom.fldDh,
-                                    'fldYueZhiBM' : vm.detailfrom.fldYueZhiBM,
-                                    'fldYueZhiBM_id' : vm.detailfrom.fldYueZhiBM_id,
-                                    'fldQianFaLD' : vm.detailfrom.fldQianFaLD,
-                                    'fldZhuSongDW' : vm.detailfrom.fldZhuSongDW,
-                                    'fldZhuSongDW_id' : vm.detailfrom.fldZhuSongDW_id
-                            };
-                        }
-                        break;
-                    case 'sfrmGongWenSXFw':  //发文会签收文
-                        if(staut == 'n'){
-                            vm.hrefpage = 'fwhq';
-                        }else {
-                            $rootScope.fromDetailJson = {
-                                'fldSubject' : vm.detailfrom.fldSubject,
-                                'fldFwbh' : vm.detailfrom.fldFwbh,
-                                'fldJinJi' : vm.detailfrom.fldJinJi,
-                                'fldFwxh' : vm.detailfrom.fldFwxh,
-                                'fldZhuSongDW_fw' : vm.detailfrom.fldZhuSongDW_fw,
-                                'fldZhuSongDW_id' : vm.detailfrom.fldZhuSongDW_id,
-                                'fldChaoSong_disp' : vm.detailfrom.fldChaoSong_disp,
-                                'fldChaoSong_id' : vm.detailfrom.fldChaoSong_id,
-                                'fldNiGaoDW' : vm.detailfrom.fldNiGaoDW,
-                                'fldQiCaoRQ' : vm.detailfrom.fldQiCaoRQ,
-                                'fldNiGaoRen' : vm.detailfrom.fldNiGaoRen,
-                                'fldHeGao' : vm.detailfrom.fldHeGao,
-                                'fldJiaoDui_1' : vm.detailfrom.fldJiaoDui_1,
-                                'fldFaWenRQ' : vm.detailfrom.fldFaWenRQ,
-                                'fldQianFaLD' : vm.detailfrom.fldQianFaLD,
-                                'fldHuiQian' : vm.detailfrom.fldHuiQian,
-                                'fldHuiQian_id' : vm.detailfrom.fldHuiQian_id
-                            };
-                        }
+                                    'fldZhuSongDW_1' : vm.detailfrom.fldZhuSongDW_1,
+                                    'fldSjYq' : vm.detailfrom.fldSjYq,
+                                    'fldZhaiYao' : vm.detailfrom.fldZhaiYao
+                                };
+                            }
+                            break;
+                        default:
+                            vm.hrefpage = '';
+                    }
+                    $rootScope.detailTitle = $rootScope.deptName;
+            }
 
-                        break;
-                    case 'sfrmGongWenSX':  //下行发文收文
-                        if(staut == 'n'){
-                            vm.hrefpage = 'fwsw';
-                        }else {
-                            $rootScope.fromDetailJson = {
-                                'fldSubject' : vm.detailfrom.fldSubject,
-                                'fldFwbh' : vm.detailfrom.fldFwbh,
-                                'fldJinJi' : vm.detailfrom.fldJinJi,
-                                'fldLwjg' : vm.detailfrom.fldLwjg,
-                                'fldswrq' : vm.detailfrom.fldswrq,
-                                'fldLwzh' : vm.detailfrom.fldLwzh,
-                                'fldswlx' : vm.detailfrom.fldswlx,
-                                'fldFaSongRY' : vm.detailfrom.fldFaSongRY,
-                                'fldZhuSongDW' : vm.detailfrom.fldZhuSongDW,
-                                'fldZhuSongDW_id' : vm.detailfrom.fldZhuSongDW_id,
-                                'fldChaoSong' : vm.detailfrom.fldChaoSong,
-                                'fldChaoSong_id' : vm.detailfrom.fldChaoSong_id,
-                                'fldYueZhi' : vm.detailfrom.fldYueZhi,
-                                'fldYueZhi_id' : vm.detailfrom.fldYueZhi_id,
-                                'fldSbsx' : vm.detailfrom.fldSbsx,
-                                'fldWcsx' : vm.detailfrom.fldWcsx,
-                                'fldCyFw' : vm.detailfrom.fldCyFw
-                            };
-                        }
-                        break;
-                    case 'sfrmBtw':  //白头文收文
-                        vm.hrefpage = 'btw';
-                        break;
-                    case 'sfrmgaozhiXbd':  //协办单收文
-
-                        if(staut == 'n'){
-                            vm.hrefpage = 'xbdsw';
-                        }else {
-                            $rootScope.fromDetailJson = {
-                                'fldFwbh' : vm.detailfrom.fldFwbh,
-                                'fldSubject' : vm.detailfrom.fldSubject,
-                                'fldJinJi' : vm.detailfrom.fldJinJi,
-                                'fldNiGaoDW' : vm.detailfrom.fldNiGaoDW,
-                                'fldNiGaoRen' : vm.detailfrom.fldNiGaoRen,
-                                'fldQiCaoRQ' : vm.detailfrom.fldQiCaoRQ,
-                                'fldDh' : vm.detailfrom.fldDh,
-                                'fldZhuSongDW_1' : vm.detailfrom.fldZhuSongDW_1,
-                                'fldSjYq' : vm.detailfrom.fldSjYq,
-                                'fldZhaiYao' : vm.detailfrom.fldZhaiYao
-                            };
-                        }
-                        break;
-                    default:
-                        vm.hrefpage = '';
-                }
-                $rootScope.detailTitle = $rootScope.deptName;
+            if($rootScope.isAjax == 'yes'){
+                detailFromSelect();
+            }
+            if($rootScope.isAjax == 'no'){
+                vm.fromType = vm.hrefpage;
+                vm.detailfrom  = $rootScope.detailfrom;
             }
         }
 
@@ -379,8 +387,5 @@
             $state.go('main.' + $rootScope.backUrl);
         }
         
-        function detailFromJson() {
-            
-        }
 	}
 })();
