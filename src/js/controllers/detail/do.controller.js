@@ -77,7 +77,7 @@
         }
 
         function actionDocument(num) {
-            console.log(num == 1);
+            window.WebViewJavascriptBridge.callHandler('progressbar',{'popLoadding':'true'},'');
             switch (parseInt(num)) {
                 case 1:
                     console.log(11);
@@ -103,7 +103,7 @@
                     $rootScope.fromDetailJson.fldselect = vm.detailRow;
                     break;
                 case 3:
-                    if($rootScope.detailJson.fldZhuSongDW.length <= 0){
+                    if($rootScope.fromDetailJson.fldZhuSongDW.length <= 0){
                         $ionicLoading.show({
                             template: '请选择会签部门！',
                             noBackdrop: true,
@@ -113,7 +113,7 @@
                     }
                     break;
                 case 6:
-                    if($rootScope.detailJson.fldZhuSongDW.length <= 0){
+                    if($rootScope.fromDetailJson.fldZhuSongDW.length <= 0){
                         $ionicLoading.show({
                             template: '请选择主办单位！',
                             noBackdrop: true,
@@ -173,7 +173,7 @@
             };
 
             dataService.post('com.cecic.moa.base.action.RestAction','actionDocument',strJson,function (msg) {
-                // console.log(JSON.stringify(msg));
+                window.WebViewJavascriptBridge.callHandler('progressbar',{'popLoadding':'false'},'');
                 if(parseInt(msg.data.res[0].h[0]['code.i']) == 0){
 
                     try{

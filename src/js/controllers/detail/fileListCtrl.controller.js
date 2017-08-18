@@ -12,7 +12,7 @@
         vm.init = init; // 初始化函数
 		vm.downloadFile = downloadFile; //附件下载方法
         vm.backPage = backPage; //返回指定列表
-
+        vm.isFile = false;
 
         // 调用初始化
         vm.init();
@@ -24,6 +24,11 @@
          */
         function init() {
 
+            if($rootScope.fiels.length <= 0){
+                vm.isFile = false;
+            }else{
+                vm.isFile = true;
+            }
             vm.detialTitle = $rootScope.detailTitle;
         	//展示数据
             vm.fileIetm = $rootScope.fiels;

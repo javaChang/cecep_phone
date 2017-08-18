@@ -11,6 +11,7 @@
         
         vm.init = init; // 初始化函数
         vm.backPage = backPage; //返回指定列表
+        vm.isHistory = false;
 
 
         // 调用初始化
@@ -22,9 +23,15 @@
          * Date:2017-6-13
          */
         function init() {
+
             vm.detialTitle = $rootScope.detailTitle;
 
 			vm.historyList = $rootScope.optionInfos;
+            if($rootScope.optionInfos.length <= 0){
+                vm.isHistory = false;
+            }else{
+                vm.isHistory = true;
+            }
 		}
 
         function backPage() {

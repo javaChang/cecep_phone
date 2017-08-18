@@ -32,7 +32,6 @@
             window.WebViewJavascriptBridge.callHandler('progressbar',{'popLoadding':'true'},'');
             vm.hrefDetail($rootScope.fromId,'n');
             vm.detialTitle = $rootScope.detailTitle;
-
 		}
 		
 		function detailFromSelect() {
@@ -270,7 +269,7 @@
                     $rootScope.detailTitle = $rootScope.deptName;
             }
 
-            if($rootScope.isAjax == 'yes'){
+            if($rootScope.isAjax == 'yes' && staut == 'n'){
                 detailFromSelect();
             }
             if($rootScope.isAjax == 'no'){

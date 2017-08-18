@@ -86,7 +86,7 @@
         }
 
         function submitFlow() {
-
+            window.WebViewJavascriptBridge.callHandler('progressbar',{'popLoadding':'true'},'');
             switch (parseInt(vm.extension)){
                 case 1: //提交
                     // vm.assigns = ;
@@ -138,7 +138,7 @@
             };
 
             dataService.post('com.cecic.moa.base.action.RestAction','submitFlow',strJson,function (msg) {
-
+                window.WebViewJavascriptBridge.callHandler('progressbar',{'popLoadding':'false'},'');
                 if(parseInt(msg.data.res[0].h[0]['code.i']) == 0){
                     vm.stopFlow = JSON.parse(JSON.parse(msg.data.res[1].b[0]['data.s']).result);
 

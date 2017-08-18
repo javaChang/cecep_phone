@@ -7,7 +7,14 @@
         <button class="button button-icon" ui-sref="detailMore"> 更多</button>
     </ion-nav-buttons>
     <ion-content overflow-scrolling="false">
-        <ion-list>
+        <div class="main-container" ng-if="vm.isFile == false">
+            <div class="main-list">
+                <div class="list-default" >
+                    暂无内容
+                </div>
+            </div>
+        </div>
+        <ion-list ng-if="vm.isFile == true">
             <ion-item class="item-thumbnail-left file-item" ng-repeat=" item in vm.fileIetm">
                 <img ng-src="img/icon_tab_file1.png">
                 <h2>{{ item.fileName }}</h2>

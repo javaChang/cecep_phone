@@ -24,8 +24,12 @@
         function init() {
 
             vm.detialTitle = $rootScope.detailTitle;
+            if($rootScope.DocumentAuthors != ''){
 
-        	vm.DocumentAuthors = ($rootScope.DocumentAuthors).join(',');
+                vm.DocumentAuthors = ($rootScope.DocumentAuthors).join(',');
+            }else{
+                vm.DocumentAuthors = '';
+            }
         	vm.stat = $rootScope.stat;
         	vm.processList = $rootScope.historyEntities;
 		}

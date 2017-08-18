@@ -4,7 +4,14 @@
         <button class="button button-icon icon ion-ios-arrow-back" ng-click="vm.backPage()"> 返回</button>
     </ion-nav-buttons>
     <ion-content overflow-scrolling="false">
-        <ion-list>
+        <div class="main-container" ng-if="vm.isHistory == false">
+            <div class="main-list">
+                <div class="list-default" >
+                    暂无内容
+                </div>
+            </div>
+        </div>
+        <ion-list ng-if="vm.isHistory == true">
             <ion-item class=" item-histort" ng-repeat=" item in vm.historyList">
                 <span ng-bind="item.optionNo" ></span>
                 <div>
