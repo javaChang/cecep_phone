@@ -4,10 +4,11 @@
         <button class="button button-icon icon ion-ios-arrow-back" ng-click="$ionicGoBack()"> 返回</button>
     </ion-nav-buttons>
     <ion-content overflow-scrolling="false">
-        <div ng-if="vm.divShowSubmit == true">
+        <div ng-if="vm.divShowSubmit == 'submitTj'">
             <div class="detail-process-div" >
                 <span>下一环节:</span>
-                <span ng-bind="vm.submitData.attinfo[0].nextname"></span>
+                <span ng-bind="vm.nextname" ng-if="vm.isWscz == true"></span>
+                <span ng-bind="vm.submitData.attinfo[0].nextname" ng-if="vm.isWscz == false"></span>
             </div>
             <div class="detail-process-div">
                 <span>办理人</span>
@@ -23,7 +24,7 @@
                 </ul>
             </div>
         </div>
-        <div ng-if="vm.divShowHq == true">
+        <div ng-if="vm.divShowSubmit == 'submitHq'">
             <div class="detail-process-div">
                 <span>会签部门</span>
             </div>
@@ -51,7 +52,7 @@
                 </ul>
             </div>
         </div>
-        <div ng-if="vm.divShowSyb == true">
+        <div ng-if="vm.divShowSubmit == 'submitSyb'">
             <div class="detail-process-div">
                 <span>主办单位</span>
             </div>
@@ -105,7 +106,7 @@
                 </ul>
             </div>
         </div>
-        <div ng-if="vm.divShowZzhq == true">
+        <div ng-if="vm.divShowSubmit == 'submitZzHq'">
             <div class="detail-process-div">
                 <span>终止会签部门</span>
             </div>
@@ -134,7 +135,40 @@
             </div>
         </div>
 
-        <div class="row row-wrap">
+        <div ng-if="vm.divShowSubmit == 'submitBack'">
+            <div class="detail-process-div" >
+                <span>下一环节:</span>
+                <span ng-bind="vm.submitData.attinfo[0].nextname"></span>
+            </div>
+            <div class="detail-process-div" >
+                <span>处理人:</span>
+                <span ng-bind="vm.submitData.attinfo[0].personZW"></span>
+            </div>
+        </div>
+        <div ng-if="vm.divShowSubmit == 'submitWscz'">
+            <div class="detail-process-div">
+                <span>公文流转</span>
+            </div>
+            <div class="row row-wrap">
+                <div class="col col-50" ng-class="{true: 'col-50-action', false: ''}[vm.nextNodeId == '{{ rowItem.id }}']" ng-repeat=" rowItem in vm.submitWsczFlow" ng-bind="rowItem.name" ng-click="vm.subSelectFlow('{{ rowItem.id }}','{{ rowItem.name }}','{{ rowItem.userId }}','{{ rowItem.user }}')"></div>
+            </div>
+            <div class="row row-wrap">
+                <div class="col col-50 col-50-action" ng-click="vm.submitRowFlow()">确认</div>
+            </div>
+        </div>
+
+        <div ng-if="vm.divShowSubmit == 'submitXbfk'">
+            <div class="detail-process-div">
+                <span>反馈意见</span>
+            </div>
+            <div class="do-box">
+                <div class="do-form">
+                    <textarea rows="2" placeholder="请填写意见" ng-model="vm.subXbfkYj" ></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="row row-wrap" ng-if="vm.subBtn == true">
             <div class="col col-50 col-50-action" ng-click="vm.submitFlow()">确认</div>
         </div>
 

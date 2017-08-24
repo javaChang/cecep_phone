@@ -19,6 +19,7 @@
         vm.popupScope = popupScope;
         vm.hrefpage = '';
         vm.source = '';
+        vm.companyTitle = companyTitle; //公司title
 
         // 调用初始化
         vm.init();
@@ -38,6 +39,7 @@
             var strJson = {
                 'url.s': $rootScope.fromId,
                 'ssoTicket.s': $rootScope.ssoTickey,
+                'company.s':$rootScope.company,
                 'cnName.s': $rootScope.userName
             };
 
@@ -76,10 +78,6 @@
                     vm.detailfrom  = detailJson;
 
                     vm.hrefDetail($rootScope.fromId,'y');
-                    // $rootScope.fromDetailJson = detailJson;
-
-
-                    // console.log($rootScope.detailFrom);
 
                 }else{
                     // 模态框
@@ -104,11 +102,14 @@
         
         function hrefDetail(id,staut) {
 
+
+
             switch(id.split('/')[5]){
                 case 'qsbg_1.nsf':
+                case 'qsbg_142.nsf':
                     if(staut == 'n'){
                         vm.hrefpage = 'jtqb';
-                        $rootScope.detailTitle = '集团签报';
+                        $rootScope.detailTitle = vm.companyTitle() + '签报';
                     }else{
                         $rootScope.fromDetailJson = {
                             'fldSubject': vm.detailfrom.fldSubject,
@@ -129,11 +130,66 @@
                     }
                     break;
                 case 'swgl_1.nsf': //集团收文
+                case 'swgl_142.nsf': //集团收文
+                    if(id.split('/')[5] == 'swgl_142.nsf' && $rootScope.typeFrom == 'sfrmgaozhiXbd'){
+                        if(staut == 'n'){
+                            vm.hrefpage = 'xbdsw';
+                            $rootScope.detailTitle = vm.companyTitle() + '协办单';
+                        }else{
+                            $rootScope.fromDetailJson = {
+                                'fldFwbh' : vm.detailfrom.fldFwbh,
+                                'fldSubject' : vm.detailfrom.fldSubject,
+                                'fldJinJi' : vm.detailfrom.fldJinJi,
+                                'fldNiGaoDW' : vm.detailfrom.fldNiGaoDW,
+                                'fldNiGaoRen' : vm.detailfrom.fldNiGaoRen,
+                                'fldQiCaoRQ' : vm.detailfrom.fldQiCaoRQ,
+                                'fldDh' : vm.detailfrom.fldDh,
+                                'fldZhuSongDW_1' : vm.detailfrom.fldZhuSongDW_1,
+                                'fldSjYq' : vm.detailfrom.fldSjYq,
+                                'fldZhaiYao' : vm.detailfrom.fldZhaiYao
+                        };
+                        }
+                        
+                        
+                    }else{
+                        if(staut == 'n'){
+                            vm.hrefpage = 'jtsw'; 
+                            $rootScope.detailTitle = vm.companyTitle() + '收文';
+                        }else{
+                           $rootScope.fromDetailJson = {
+                                'Fldfwbh': vm.detailfrom.Ffldfwbh,
+                                'Fldjinji': vm.detailfrom.Fldjinji,
+                                'fldSubject': vm.detailfrom.fldSubject,
+                                'fldLwjg': vm.detailfrom.fldLwjg,
+                                'fldswlx': vm.detailfrom.fldswlx,
+                                'fldLwzh': vm.detailfrom.fldLwzh,
+                                'fldLwqd': vm.detailfrom.fldLwqd,
+                                'fldFaSongRY': vm.detailfrom.fldFaSongRY,
+                                'fldFaSongRY_id': vm.detailfrom.fldFaSongRY_id,
+                                'fldZhuSongDW': vm.detailfrom.fldZhuSongDW,
+                                'fldZhuSongDW_id': vm.detailfrom.fldZhuSongDW_id,
+                                'fldChaoSong': vm.detailfrom.fldChaoSong,
+                                'fldChaoSong_id': vm.detailfrom.fldChaoSong_id,
+                                'fldYueZhi': vm.detailfrom.fldYueZhi,
+                                'fldYueZhi_id':  vm.detailfrom.fldYueZhi_id,
+                                'fldYueZhiRy':  vm.detailfrom.fldYueZhiRy,
+                                'fldYueZhiRy_id':  vm.detailfrom.fldYueZhiRy_id,
+                                'fldIsCsbm':  vm.detailfrom.fldIsCsbm,
+                                'fldIsSb':  vm.detailfrom.fldIsSb,
+                                'fldSbsx':  vm.detailfrom.fldSbsx,
+                                'fldGdQx':  vm.detailfrom.fldGdQx,
+                                'fldSwBeiZhu':   vm.detailfrom.fldSwBeiZhu.data
+                            } 
+                        }
+                        
+                        
+                        }
                     break;
                 case 'fwgl_1.nsf': //集团发文
+                case 'fwgl_142.nsf': //集团发文
                     if(staut == 'n'){
                         vm.hrefpage = 'jtfw';
-                        $rootScope.detailTitle = '集团发文';
+                        $rootScope.detailTitle = vm.companyTitle() + '发文';
                     }else {
                         $rootScope.fromDetailJson = {
                             'Fldfwbh': vm.detailfrom.Fldfwbh,
@@ -154,16 +210,19 @@
                     }
                     break;
                 case 'jthyjy_1.nsf': //会议纪要
+                case 'jthyjy_142.nsf': //会议纪要
                     vm.hrefpage = 'jthyjy';
                     $rootScope.detailTitle = '会议纪要';
                     break;
                 case 'xbd_1.nsf': //协办单
+                case 'xbd_142.nsf': //协办单
                     vm.hrefpage = 'xbd';
-                    $rootScope.detailTitle = '集团协办单';
+                    $rootScope.detailTitle = vm.companyTitle() + '协办单';
                     break;
                 case 'qtwj_1.nsf': //白头文
+                case 'qtwj_142.nsf': //白头文
                     vm.hrefpage = 'qtwj';
-                    $rootScope.detailTitle = '集团白头文';
+                    $rootScope.detailTitle = vm.companyTitle() + '白头文';
                     break;
                 default:
                     switch($rootScope.typeFrom){
@@ -216,6 +275,7 @@
                             }
 
                             break;
+                        case 'sfrmGongWenSXnew':
                         case 'sfrmGongWenSX':  //下行发文收文
                             if(staut == 'n'){
                                 vm.hrefpage = 'fwsw';
@@ -273,6 +333,7 @@
                 detailFromSelect();
             }
             if($rootScope.isAjax == 'no'){
+                window.WebViewJavascriptBridge.callHandler('progressbar',{'popLoadding':'false'},'');
                 vm.fromType = vm.hrefpage;
                 vm.detailfrom  = $rootScope.detailfrom;
             }
@@ -384,6 +445,15 @@
         
         function backPage() {
             $state.go('main.' + $rootScope.backUrl);
+        }
+
+        function companyTitle(){
+            if($rootScope.company == 'jtzb'){
+                return '集团';
+            }else{
+                return '公司';
+            }
+           
         }
         
 	}

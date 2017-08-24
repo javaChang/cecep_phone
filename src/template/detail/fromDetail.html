@@ -255,14 +255,14 @@
                 </li>
                 <li>
                     <div class="row deital-row-li">
-                        <div class="col col-20">主送单位</div>
+                        <div class="col col-20">抄送单位</div>
                         <div class="col col-80" ng-bind="vm.detailfrom.fldChaoSong"></div>
                     </div>
                 </li>
                 <!-- 需重新设计 -->
                 <li>
                     <div class="row deital-row-li">
-                        <div class="col col-20">集团领导</div>
+                        <div class="col col-20" >{{vm.companyTitle()}}领导</div>
                         <div class="col col-80" ng-bind="vm.detailfrom.fldFaSongRY"></div>
                     </div>
                 </li>
@@ -942,12 +942,6 @@
                 </li>
                 <li>
                     <div class="row deital-row-li">
-                        <div class="col col-20">标题</div>
-                        <div class="col col-80" ng-bind="vm.detailfrom.fldSubject"></div>
-                    </div>
-                </li>
-                <li>
-                    <div class="row deital-row-li">
                         <div class="col col-20">是否审核</div>
                         <div class="col col-80" ng-bind="vm.detailfrom.fldJgCk"></div>
                     </div>
@@ -973,15 +967,15 @@
                 <li>
                     <div class="row deital-row-li">
                         <div class="col col-20">协办事项</div>
-                        <div class="col col-80" ng-bind="vm.detailfrom.fldZhaiYao"></div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldZhaiYao.data"></div>
                     </div>
                 </li>
-                <li>
+               <!--  <li>
                     <div class="row deital-row-li">
                         <div class="col col-20">办理结果</div>
                         <div class="col col-80" ng-bind="vm.detailfrom.fldBlJg"></div>
                     </div>
-                </li>
+                </li> -->
             </ul>
         </div>
 

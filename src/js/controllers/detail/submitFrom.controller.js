@@ -14,6 +14,11 @@
         vm.divFlow = divFlow; //显示模块
         vm.submitFlow = submitFlow; //确认提交
         vm.popupScope = popupScope;
+        vm.subSelectFlow = subSelectFlow;
+        vm.submitRowFlow  = submitRowFlow;
+        vm.nextname = '';
+        vm.subBtn = true;
+        vm.isWscz = false;
         // vm.divShow = false; //提交确认是否显示
         vm.submitData = '';
         vm.assigns = '';
@@ -32,6 +37,9 @@
         vm.fldYueZhiSub = '';
         vm.fldYueZhiRySub = '';
         vm.stopFlow = '';
+        vm.submitWsczFlow = [];
+        vm.subDetailRow = '';
+        vm.subXbfkYj = '';
 
         // 调用初始化
         vm.init();
@@ -48,23 +56,21 @@
 
 		function divFlow() {
             vm.submitData = $rootScope.actionDocument;
-
-            // $rootScope.fromDetailJson.assigns  受理人
             console.log(vm.submitData);
             switch ($stateParams.submitType){
                 case 'tj':  //提交
                     vm.extension = '1';
-                    vm.divShowSubmit = true;
+                    vm.divShowSubmit = 'submitTj';
                     break;
                 case 'hq': //会签
                     vm.extension = '3';
                     vm.fldZhuSongDWSub = $rootScope.fromDetailJson.fldZhuSongDW;
                     vm.fldZhiHuiRYSub = $rootScope.fromDetailJson.fldZhiHuiRY;
-                    vm.divShowHq = true;
+                    vm.divShowSubmit = 'submitHq';
                     break;
                 case 'zzhq': //终止会签
                     vm.extension = '11';
-                    vm.divShowZzhq = true;
+                    vm.divShowSubmit = 'submitZzHq';
                     break;
                 case 'syb': //送阅办
                     vm.extension = '6';
@@ -72,13 +78,35 @@
                     vm.fldChaoSongDWSub = $rootScope.fromDetailJson.fldChaoSongDW;
                     vm.fldYueZhiSub = $rootScope.fromDetailJson.fldYueZhi;
                     vm.fldYueZhiRySub = $rootScope.fromDetailJson.fldYueZhiRy;
-                    vm.divShowSyb = true;
+                    vm.divShowSubmit = 'submitSyb';
                     break;
                 case 'sbl': //送办理
-                    vm.divShowSbl = true;
+                    vm.divShowSubmit = 'submitSbl';
                     break;
                 case 'zzbl': //终止办理
-                    vm.divShowZzbl = true;
+                    vm.divShowSubmit = 'submitZzBl';
+                    break;
+                case 'back':
+                    vm.extension = '2';
+                    vm.divShowSubmit = 'submitBack';
+                    break;
+                case 'wscz':
+                    vm.extension = '7';
+                    for(var i = 0; i < vm.submitData.hfldNextflownum.length; i++) {
+                        var folw = {
+                            'id':vm.submitData.hfldNextflownum[i],
+                            'name':vm.submitData.hfldNextflowstat[i],
+                            'userId':vm.submitData.strNextStat_userid[i],
+                            'user':vm.submitData.strNextStat_user[i]
+                        };
+                        vm.submitWsczFlow.push(folw);
+                    }
+                    vm.subBtn = false;
+                    vm.divShowSubmit = 'submitWscz';
+                    break;
+                case 'xbfk':
+                    vm.extension = '20';
+                    vm.divShowSubmit = 'submitXbfk';
                     break;
             }
 
@@ -96,7 +124,14 @@
                             noBackdrop: true,
                             duration: 2000
                         });
+                        return false;
                     }
+                    if(vm.isWscz == false){
+                        vm.nextNodeId = vm.submitData.attinfo[0].NextNodeId;
+                    }
+                    break;
+                case 2: //返回上一级处理人
+                    $rootScope.fromDetailJson.assigns = vm.submitData.attinfo[0].person;
                     vm.nextNodeId = vm.submitData.attinfo[0].NextNodeId;
                     break;
                 case 3:  //会签
@@ -122,6 +157,21 @@
                         'fldYueZhi_id': $rootScope.fromDetailJson.fldYueZhi_id,
                         'fldYueZhiRy': $rootScope.fromDetailJson.fldYueZhiRySub
                     };
+                    vm.opinStr = JSON.stringify(vm.opinStr);
+                    break;
+                case 20:
+                    if(vm.subXbfkYj == ''){
+                        $ionicLoading.show({
+                            template: '请填写反馈意见！',
+                            noBackdrop: true,
+                            duration: 2000
+                        });
+                        return false;
+                    }
+                    vm.extension = '12';
+                    vm.opinStr = {
+                        'fldBlJg':vm.subXbfkYj
+                    }
                     break;
             }
 
@@ -134,9 +184,10 @@
                 'nextuser.s': $rootScope.fromDetailJson.assigns,
                 'flownum.s': vm.nextNodeId,
                 'extension.s': vm.extension,
+                'company.s':$rootScope.company,
                 'opin.s': JSON.stringify(vm.opinStr)
             };
-
+            
             dataService.post('com.cecic.moa.base.action.RestAction','submitFlow',strJson,function (msg) {
                 window.WebViewJavascriptBridge.callHandler('progressbar',{'popLoadding':'false'},'');
                 if(parseInt(msg.data.res[0].h[0]['code.i']) == 0){
@@ -256,6 +307,21 @@
                 ]
             });
 
+        }
+
+        function submitRowFlow(){
+            vm.subBtn = true;
+            vm.isWscz = true;
+            $stateParams.submitType = 'tj';
+            divFlow();
+        }
+
+        function subSelectFlow(id,name,userId,user) {
+            // vm.subDetailRow 
+            vm.nextname = name;
+            vm.nextNodeId = id;
+            vm.assigns = user.substring(3,user.indexOf('/'));
+            $rootScope.fromDetailJson.assigns = user;
         }
 
         function backPage() {

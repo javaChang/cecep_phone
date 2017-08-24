@@ -13,8 +13,6 @@
         <div class="do-box" ng-if="vm.selectDiv == true">
             <div class="do-form do-form-select" data-tap-disabled=”true”>
                 <div class="do-from-div-select " ng-click="vm.sheetShow()" ng-bind="vm.selData" ></div>
-                <!-- <select ng-init="vm.selectedName = vm.selectDate[0]" ng-change="vm.infoChange()" ng-model="vm.selectedName" ng-options="x for x in vm.selectDate">
-                </select> -->
             </div>
             <div class="do-form">
                 <textarea rows="2" placeholder="请填写意见" ng-model="vm.selData" ></textarea>
@@ -35,6 +33,9 @@
             <div class="col col-50 col-50-action" ng-if="vm.actionDocBtn.fldHq == 1" ng-click="vm.actionDocument('3')">会签</div>
             <div class="col col-50 col-50-action" ng-if="vm.actionDocBtn.fldbmfk == 1" ng-click="vm.actionDocument('14')">部门反馈</div>
             <div class="col col-50 col-50-action" ng-if="vm.actionDocBtn.fldbmfk == 2" ng-click="vm.actionDocument('142')">部门反馈</div>
+            <div class="col col-50 col-50-action" ng-if="vm.actionDocBtn.fldWscz == 1" ng-click="vm.actionDocument('7')">文书撤转</div>
+            <div class="col col-50 col-50-action" ng-if="vm.actionDocBtn.fldBmxbdfk == 1" ng-click="vm.actionDocument('20')">协办反馈</div>
+            <div class="col col-50 col-50-action" ng-if="vm.actionDocBtn.fldDeny == 1" ng-click="vm.actionDocument('2')">返回上一处理人</div>
         </div>
         <div class="detail-process-div">
             <span>常用功能</span>

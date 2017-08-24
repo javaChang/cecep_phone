@@ -56,6 +56,7 @@
                 'docType.s': 'yy_list',
                 'ssoTicket.s': $rootScope.ssoTickey,
                 'cnName.s': $rootScope.userName,
+                'company.s':$rootScope.company,
                 'start.s': vm.startRows,
                 'size.s': vm.pageSize
             };
@@ -122,6 +123,7 @@
                 'docType.s': 'yy_list',
                 'ssoTicket.s': $rootScope.ssoTickey,
                 'cnName.s': $rootScope.userName,
+                'company.s':$rootScope.company,
                 'start.s': vm.rowsCount * vm.pageSize,
                 'size.s': vm.pageSize
             };

@@ -80,7 +80,6 @@
             window.WebViewJavascriptBridge.callHandler('progressbar',{'popLoadding':'true'},'');
             switch (parseInt(num)) {
                 case 1:
-                    console.log(11);
                     if(vm.selData == '' || vm.selData == null){
                         $ionicLoading.show({
                             template: '请填写意见！',
@@ -102,15 +101,39 @@
                     $rootScope.fromDetailJson.fldAttitude = vm.selData;
                     $rootScope.fromDetailJson.fldselect = vm.detailRow;
                     break;
-                case 3:
-                    if($rootScope.fromDetailJson.fldZhuSongDW.length <= 0){
-                        $ionicLoading.show({
-                            template: '请选择会签部门！',
-                            noBackdrop: true,
-                            duration: 2000
-                        });
-                        return false;
+                case 2:
+                case 7:
+                    if(vm.selData != '' || vm.selData != null){
+                        $rootScope.fromDetailJson.fldAttitude = vm.selData;
                     }
+                    break;
+                case 3:
+                    
+                    switch((vm.actionDocBtn.dataPath).split('/')[2]){
+                        case 'fwgl_1.nsf':
+                        case 'fwgl_142.nsf':
+                            if($rootScope.fromDetailJson.fldHuiQian == undefined || $rootScope.fromDetailJson.fldHuiQian.length <= 0){
+                                $ionicLoading.show({
+                                    template: '请选择会签部门！',
+                                    noBackdrop: true,
+                                    duration: 2000
+                                });
+                                return false;
+                            }
+                            break;
+                        case 'qsbg_1':
+                        case 'qsbg_142':
+                            if($rootScope.fromDetailJson.fldZhuSongDW == undefined || $rootScope.fromDetailJson.fldZhuSongDW.length <= 0){
+                                $ionicLoading.show({
+                                    template: '请选择会签部门！',
+                                    noBackdrop: true,
+                                    duration: 2000
+                                });
+                                return false;
+                            }
+                            break;
+                    }
+
                     break;
                 case 6:
                     if($rootScope.fromDetailJson.fldZhuSongDW.length <= 0){
@@ -169,6 +192,7 @@
                     'dbpath.s': vm.actionDocBtn.dataPath,
                     'curuser.s': $rootScope.userName,
                     'extension.s': num,
+                    'company.s':$rootScope.company,
                     'opin.s': JSON.stringify($rootScope.fromDetailJson)
             };
 
@@ -193,6 +217,9 @@
                             case 1: // 提交
                                 $state.go('submitFrom',{'submitType':'tj'});
                                 break;
+                            case 2: //返回上一级处理人
+                                $state.go('submitFrom',{'submitType':'back'});
+                                break;
                             case 3: // 会签
                                 $state.go('submitFrom',{'submitType':'hq'});
                                 break;
@@ -201,6 +228,9 @@
                                 break;
                             case 6: // 送阅办
                                 $state.go('submitFrom',{'submitType':'syb'});
+                                break;
+                            case 7: //文书撤转
+                                $state.go('submitFrom',{'submitType':'wscz'});
                                 break;
                             case 8: //保存退出
                             case 9: //撤回
@@ -218,6 +248,9 @@
                                 break;
                             case 16: // 终止办理(协办单)
                                 $state.go('submitFrom',{'submitType':'zzbl'});
+                                break;
+                            case 20: //协办反馈(财务公司)
+                                $state.go('submitFrom',{'submitType':'xbfk'});
                                 break;
                             default:
                                 $state.go('main.' + $rootScope.backUrl);

@@ -67,48 +67,12 @@
                 });
 
             }else {
-                // ns.runtime.userinfo({
-                //     onSuccess: function(data) {
-                //         $rootScope.ssoTickey = data.obj.ssoTicket;
-                //         $rootScope.realName = data.obj.user.realName;
-                //         $rootScope.userName = data.obj.user.userName;
-                //         $rootScope.company = data.obj.user.company;
-                //         vm.menuSelect();
-                //         if($rootScope.isDetailHref == 'no'){
-                //              vm.getDatas();
-                //         }else{
-                //             $rootScope.isDetailHref = 'no';
-                //             vm.detailHref($rootScope.detailUrl,$rootScope.detailType,$rootScope.detailBack);
-                //         }
-                //     },
-                //     onFail: function(msg) {
-                //         console.log('推送异常：获取ssoTicket失败', JSON.stringify(msg));
-                //         $ionicLoading.show({
-                //             template: '推送异常：获取ssoTicket失败',
-                //             noBackdrop: true,
-                //             duration: 3000
-                //         });
-                //     }
-                // });
-                //模拟登陆
-                var dataStr = {
-                    'agencyCode.s': '001',
-                    // 'password.s': 'sc123456',
-                    // 'userName.s': 'danchun'
-                    // 'password.s': 'yangxing123',
-                    // 'userName.s': 'yangxing1'
-                    'password.s': '1234qwer',
-                    'userName.s': 'mengweiqiang'
-                    // 'password.s': 'lele940329',
-                    // 'userName.s': 'wangzining1'
-                };
-
-                dataService.post('com.nqsky.meap.api.sso.service.ISsoAPIService', 'login', dataStr, function (msg) {
-                    if (parseInt(msg.data.res[0].h[0]['code.i']) == 0) {
-                        $rootScope.ssoTickey = msg.data.res[1].b[4]['ssoCertification'][0]['access_token.s'];
-                        $rootScope.realName = msg.data.res[1].b[1]['UserAccount'][0]['realName.s'];
-                        $rootScope.userName = msg.data.res[1].b[1]['UserAccount'][0]['userName.s'];
-                        $rootScope.company = msg.data.res[1].b[3]['company'][0]['company.s'];
+                ns.runtime.userinfo({
+                    onSuccess: function(data) {
+                        $rootScope.ssoTickey = data.obj.ssoTicket;
+                        $rootScope.realName = data.obj.user.realName;
+                        $rootScope.userName = data.obj.user.userName;
+                        $rootScope.company = data.obj.user.partTiemJob;
                         vm.menuSelect();
                         if($rootScope.isDetailHref == 'no'){
                              vm.getDatas();
@@ -116,17 +80,57 @@
                             $rootScope.isDetailHref = 'no';
                             vm.detailHref($rootScope.detailUrl,$rootScope.detailType,$rootScope.detailBack);
                         }
-
-                    } else {
+                    },
+                    onFail: function(msg) {
+                        console.log('推送异常：获取ssoTicket失败', JSON.stringify(msg));
                         $ionicLoading.show({
-                            template: '登陆失败！',
+                            template: '推送异常：获取ssoTicket失败',
                             noBackdrop: true,
                             duration: 3000
                         });
                     }
-                }, function (err) {
-
                 });
+                //模拟登陆
+                // var dataStr = {
+                //     'agencyCode.s': '001',
+                //     // 'password.s': 'sc123456',
+                //     // 'userName.s': 'shanchun'
+                //     // 'password.s': 'yangxing123',
+                //     // 'userName.s': 'yangxing1'
+                //     'password.s': 'mq456789',
+                //     'userName.s': 'mengqian'
+                //     // 'password.s': 'wangzhang12345',
+                //     // 'userName.s': 'wanglijuan'
+                //     // 'password.s': '1234qwer',
+                //     // 'userName.s': 'mengweiqiang'
+                //     // 'password.s': 'lele940329',
+                //     // 'userName.s': 'wangzining1'
+                // };
+
+                // dataService.post('com.nqsky.meap.api.sso.service.ISsoAPIService', 'login', dataStr, function (msg) {
+                //     if (parseInt(msg.data.res[0].h[0]['code.i']) == 0) {
+                //         $rootScope.ssoTickey = msg.data.res[1].b[4]['ssoCertification'][0]['access_token.s'];
+                //         $rootScope.realName = msg.data.res[1].b[1]['UserAccount'][0]['realName.s'];
+                //         $rootScope.userName = msg.data.res[1].b[1]['UserAccount'][0]['userName.s'];
+                //         $rootScope.company = msg.data.res[1].b[3]['company'][0]['company.s'];
+                //         vm.menuSelect();
+                //         if($rootScope.isDetailHref == 'no'){
+                //              vm.getDatas();
+                //         }else{
+                //             $rootScope.isDetailHref = 'no';
+                //             vm.detailHref($rootScope.detailUrl,$rootScope.detailType,$rootScope.detailBack);
+                //         }
+
+                //     } else {
+                //         $ionicLoading.show({
+                //             template: '登陆失败！',
+                //             noBackdrop: true,
+                //             duration: 3000
+                //         });
+                //     }
+                // }, function (err) {
+
+                // });
 
                 if ($rootScope.ssoTicket == '') {
                     $rootScope.ssoTicket = sessionStorage.getItem('ssoTicket');
@@ -149,6 +153,7 @@
                 'docType.s': 'db_list',
                 'ssoTicket.s': $rootScope.ssoTickey,
                 'cnName.s': $rootScope.userName,
+                'company.s':$rootScope.company,
                 'start.s': vm.startRows,
                 'size.s': vm.pageSize
             };
@@ -214,6 +219,7 @@
                 'docType.s': 'db_list',
                 'ssoTicket.s': $rootScope.ssoTickey,
                 'cnName.s': $rootScope.userName,
+                'company.s':$rootScope.company,
                 'start.s': vm.rowsCount * vm.pageSize,
                 'size.s': vm.pageSize
             };
@@ -276,6 +282,7 @@
         function menuSelect() {
             var strJson = {
                 'ssoTicket.s':$rootScope.ssoTickey,
+                'company.s':$rootScope.company,
                 'userCode.s': $rootScope.userName
             };
 
