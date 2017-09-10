@@ -61,6 +61,8 @@
                 case 'tj':  //提交
                     vm.extension = '1';
                     vm.divShowSubmit = 'submitTj';
+                    vm.assigns = vm.submitData.attinfo[0].personZW;
+                    $rootScope.fromDetailJson.assigns = 'CN=' + vm.submitData.attinfo[0].personZW + '/O=cecic' ;
                     break;
                 case 'hq': //会签
                     vm.extension = '3';
