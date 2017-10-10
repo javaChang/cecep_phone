@@ -67,52 +67,14 @@
                 });
 
             }else {
-                ns.runtime.userinfo({
-                    onSuccess: function(data) {
-                        $rootScope.ssoTickey = data.obj.ssoTicket;
-                        $rootScope.realName = data.obj.user.realName;
-                        $rootScope.userName = data.obj.user.userName;
-                        $rootScope.company = data.obj.user.partTiemJob;
-                        vm.menuSelect();
-                        if($rootScope.isDetailHref == 'no'){
-                             vm.getDatas();
-                        }else{
-                            $rootScope.isDetailHref = 'no';
-                            vm.detailHref($rootScope.detailUrl,$rootScope.detailType,$rootScope.detailBack);
-                        }
-                    },
-                    onFail: function(msg) {
-                        console.log('推送异常：获取ssoTicket失败', JSON.stringify(msg));
-                        $ionicLoading.show({
-                            template: '推送异常：获取ssoTicket失败',
-                            noBackdrop: true,
-                            duration: 3000
-                        });
-                    }
-                });
-                //模拟登陆
-                // var dataStr = {
-                //     'agencyCode.s': '001',
-                //     // 'password.s': 'sc123456',
-                //     // 'userName.s': 'shanchun'
-                //     // 'password.s': 'yangxing123',
-                //     // 'userName.s': 'yangxing1'
-                //     'password.s': 'mq456789',
-                //     'userName.s': 'mengqian'
-                //     // 'password.s': 'wangzhang12345',
-                //     // 'userName.s': 'wanglijuan'
-                //     // 'password.s': '1234qwer',
-                //     // 'userName.s': 'mengweiqiang'
-                //     // 'password.s': 'lele940329',
-                //     // 'userName.s': 'wangzining1'
-                // };
-
-                // dataService.post('com.nqsky.meap.api.sso.service.ISsoAPIService', 'login', dataStr, function (msg) {
-                //     if (parseInt(msg.data.res[0].h[0]['code.i']) == 0) {
-                //         $rootScope.ssoTickey = msg.data.res[1].b[4]['ssoCertification'][0]['access_token.s'];
-                //         $rootScope.realName = msg.data.res[1].b[1]['UserAccount'][0]['realName.s'];
-                //         $rootScope.userName = msg.data.res[1].b[1]['UserAccount'][0]['userName.s'];
-                //         $rootScope.company = msg.data.res[1].b[3]['company'][0]['company.s'];
+                // console.log('开始请求1：'+Date.parse(new Date()));
+                // ns.runtime.userinfo({
+                //     onSuccess: function(data) {
+                //         console.log('请求请求1：'+Date.parse(new Date()));
+                //         $rootScope.ssoTickey = data.obj.ssoTicket;
+                //         $rootScope.realName = data.obj.user.realName;
+                //         $rootScope.userName = data.obj.user.userName;
+                //         $rootScope.company = data.obj.user.partTiemJob;
                 //         vm.menuSelect();
                 //         if($rootScope.isDetailHref == 'no'){
                 //              vm.getDatas();
@@ -120,17 +82,52 @@
                 //             $rootScope.isDetailHref = 'no';
                 //             vm.detailHref($rootScope.detailUrl,$rootScope.detailType,$rootScope.detailBack);
                 //         }
-
-                //     } else {
+                //     },
+                //     onFail: function(msg) {
+                //         console.log('推送异常：获取ssoTicket失败', JSON.stringify(msg));
                 //         $ionicLoading.show({
-                //             template: '登陆失败！',
+                //             template: '推送异常：获取ssoTicket失败',
                 //             noBackdrop: true,
                 //             duration: 3000
                 //         });
                 //     }
-                // }, function (err) {
-
                 // });
+                //模拟登陆
+                var dataStr = {
+                    'agencyCode.s': '001',
+                    // 'userName.s':'zhangxianhui1',
+                    // 'password.s':'1234qwer'
+                    'password.s': 'passc0de',
+                    'userName.s': 'niyuqi'
+                    // 'password.s': '1234qwer',
+                    // 'userName.s': 'mengweiqiang'
+                    // 'password.s': 'lele940329',
+                    // 'userName.s': 'wangzining1'
+                };
+                dataService.post('com.nqsky.meap.api.sso.service.ISsoAPIService', 'login', dataStr, function (msg) {
+                    if (parseInt(msg.data.res[0].h[0]['code.i']) == 0) {
+                        $rootScope.ssoTickey = msg.data.res[1].b[4]['ssoCertification'][0]['access_token.s'];
+                        $rootScope.realName = msg.data.res[1].b[1]['UserAccount'][0]['realName.s'];
+                        $rootScope.userName = msg.data.res[1].b[1]['UserAccount'][0]['userName.s'];
+                        $rootScope.company = msg.data.res[1].b[3]['company'][0]['company.s'];
+                        vm.menuSelect();
+                        if($rootScope.isDetailHref == 'no'){
+                             vm.getDatas();
+                        }else{
+                            $rootScope.isDetailHref = 'no';
+                            vm.detailHref($rootScope.detailUrl,$rootScope.detailType,$rootScope.detailBack);
+                        }
+
+                    } else {
+                        $ionicLoading.show({
+                            template: msg.data.res[1].b[0].error[0]['case.s'],
+                            noBackdrop: true,
+                            duration: 3000
+                        });
+                    }
+                }, function (err) {
+
+                });
 
                 if ($rootScope.ssoTicket == '') {
                     $rootScope.ssoTicket = sessionStorage.getItem('ssoTicket');
@@ -147,7 +144,6 @@
          */
 
         function getDatas() {
-
             //获取代办列表
             var strJson = {
                 'docType.s': 'db_list',
@@ -181,7 +177,7 @@
                 } else {
                     // 模态框
                     $ionicLoading.show({
-                        template: 'Sorry，数据加载出错！',
+                        template: msg.data.res[1].b[0].error[0]['message.s'],
                         noBackdrop: true,
                         duration: 3000
                     });
@@ -191,7 +187,7 @@
                 window.WebViewJavascriptBridge.callHandler('progressbar',{'popLoadding':'false'},'');
                 // 模态框
                 $ionicLoading.show({
-                    template: '网络连接错误',
+                    template: '由于网络原因，打开失败请再次打开轻应用！！',
                     noBackdrop: true,
                     duration: 3000
                 });
@@ -245,7 +241,7 @@
 
                     // 模态框
                     $ionicLoading.show({
-                        template: 'Sorry，数据加载出错！',
+                        template: msg.data.res[1].b[0].error[0]['message.s'],
                         noBackdrop: true,
                         duration: 3000
                     });
@@ -254,7 +250,7 @@
 
                 // 模态框
                 $ionicLoading.show({
-                    template: '网络连接错误',
+                    template: '网络连接错误，请重新下拉刷新数据！',
                     noBackdrop: true,
                     duration: 3000
                 });
@@ -298,7 +294,7 @@
                 } else {
                     // 模态框
                     $ionicLoading.show({
-                        template: 'Sorry，数据加载出错！',
+                        template: '由于网络愿意，获取菜单失败请再次打开！！',
                         noBackdrop: true,
                         duration: 3000
                     });

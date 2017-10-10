@@ -32,6 +32,7 @@
                 obj = {
                     method: type ,
                     url: urlName ,
+                    timeout: 10000,
                     data: {
                         'req': [{
                             'h': [{

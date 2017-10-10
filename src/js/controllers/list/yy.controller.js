@@ -85,7 +85,7 @@
                 } else {
                     // 模态框
                     $ionicLoading.show({
-                        template: 'Sorry，数据加载出错！',
+                        template: msg.data.res[1].b[0].error[0]['message.s'],
                         noBackdrop: true,
                         duration: 3000
                     });
@@ -149,7 +149,7 @@
 
                     // 模态框
                     $ionicLoading.show({
-                        template: 'Sorry，数据加载出错！',
+                        template: msg.data.res[1].b[0].error[0]['message.s'],
                         noBackdrop: true,
                         duration: 3000
                     });

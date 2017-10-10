@@ -26,7 +26,12 @@
 
             vm.detialTitle = $rootScope.detailTitle;
 
+
         	vm.notifyRecord = $rootScope.notifyRecord;
+
+            if($rootScope.notifyUser == undefined){
+                return false;
+            }
 
             vm.notifyUser = vm.notifyRecord.notifyUser;
             vm.readUser = vm.notifyRecord.readUser;

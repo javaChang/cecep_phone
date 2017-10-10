@@ -50,19 +50,20 @@
          * Date:2017-6-13
          */
         function init() {
-
+            $rootScope.fromDetailJson.assigns = '';
             divFlow();
 		}
 
 		function divFlow() {
             vm.submitData = $rootScope.actionDocument;
-            console.log(vm.submitData);
             switch ($stateParams.submitType){
                 case 'tj':  //提交
                     vm.extension = '1';
                     vm.divShowSubmit = 'submitTj';
                     vm.assigns = vm.submitData.attinfo[0].personZW;
-                    $rootScope.fromDetailJson.assigns = 'CN=' + vm.submitData.attinfo[0].personZW + '/O=cecic' ;
+                    if(vm.submitData.attinfo[0].personZW &&  vm.submitData.attinfo[0].personZW.length > 0 ){
+                        $rootScope.fromDetailJson.assigns = 'CN=' + vm.submitData.attinfo[0].personZW + '/O=cecic' ;
+                    }
                     break;
                 case 'hq': //会签
                     vm.extension = '3';
@@ -116,7 +117,7 @@
         }
 
         function submitFlow() {
-            window.WebViewJavascriptBridge.callHandler('progressbar',{'popLoadding':'true'},'');
+
             switch (parseInt(vm.extension)){
                 case 1: //提交
                     // vm.assigns = ;
@@ -124,7 +125,7 @@
                         $ionicLoading.show({
                             template: '请选择受理人！',
                             noBackdrop: true,
-                            duration: 2000
+                            duration: 3000
                         });
                         return false;
                     }
@@ -166,18 +167,18 @@
                         $ionicLoading.show({
                             template: '请填写反馈意见！',
                             noBackdrop: true,
-                            duration: 2000
+                            duration: 3000
                         });
                         return false;
                     }
                     vm.extension = '12';
                     vm.opinStr = {
                         'fldBlJg':vm.subXbfkYj
-                    }
+                    };
                     break;
             }
 
-
+            window.WebViewJavascriptBridge.callHandler('progressbar',{'popLoadding':'true'},'');
             var strJson = {
                 'requestId.s': vm.submitData.requestId,
                 'unid.s': vm.submitData.unid,
@@ -203,7 +204,7 @@
             },function (err) {
                 // 模态框
                 $ionicLoading.show({
-                    template: 'Sorry，数据加载出错！',
+                    template: '网络错误，请重新提交！',
                     noBackdrop: true,
                     duration: 3000
                 });
@@ -223,6 +224,10 @@
                 titleName = '选择人员';
             }else {
                 titleName = '选择部门';
+            }
+
+            if($rootScope.actionDocument.attinfo[0].fldJueSe != ''){
+                vm.agencyId = '40287f6059af7e40015a41bd05eb7e9b';
             }
 
             var params = {

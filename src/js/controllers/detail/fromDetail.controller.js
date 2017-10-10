@@ -47,6 +47,7 @@
                 window.WebViewJavascriptBridge.callHandler('progressbar',{'popLoadding':'false'},'');
                 if (parseInt(msg.data.res[0].h[0]['code.i']) == 0) {
 
+                    
                     var detailJson = JSON.parse(msg.data.res[1].b[0]['data.s']);
 
                     $rootScope.detailfrom = detailJson;
@@ -78,11 +79,25 @@
                     vm.detailfrom  = detailJson;
 
                     vm.hrefDetail($rootScope.fromId,'y');
+                    
+                    if($rootScope.operate.msg != undefined){
+                         // 模态框
+                        $ionicLoading.show({
+                            template: $rootScope.operate.msg,
+                            noBackdrop: true,
+                            duration: 1500
+                        });
+                        setTimeout(function(){
+                            backPage();
+                        },1800);
+                        
+                    }
+
 
                 }else{
                     // 模态框
                     $ionicLoading.show({
-                        template: 'Sorry，数据加载出错！',
+                        template: msg.data.res[1].b[0].error[0]['message.s'],
                         noBackdrop: true,
                         duration: 3000
                     });
@@ -92,7 +107,7 @@
                 window.WebViewJavascriptBridge.callHandler('progressbar',{'popLoadding':'false'},'');
                 // 模态框
                 $ionicLoading.show({
-                    template: 'Sorry，数据加载出错！',
+                    template: '网络连接错误，请重新打开！',
                     noBackdrop: true,
                     duration: 3000
                 });
@@ -101,8 +116,6 @@
         
         
         function hrefDetail(id,staut) {
-
-
 
             switch(id.split('/')[5]){
                 case 'qsbg_1.nsf':
@@ -179,7 +192,7 @@
                                 'fldSbsx':  vm.detailfrom.fldSbsx,
                                 'fldGdQx':  vm.detailfrom.fldGdQx,
                                 'fldSwBeiZhu':   vm.detailfrom.fldSwBeiZhu.data
-                            } 
+                            };
                         }
                         
                         
@@ -444,7 +457,28 @@
         }
         
         function backPage() {
-            $state.go('main.' + $rootScope.backUrl);
+
+            if($rootScope.operate == undefined){
+                $state.go('main.' + $rootScope.backUrl);
+                return false;
+            }
+
+            var strJson = {
+                    'requestId.s': $rootScope.operate.requestId,
+                    'unid.s': $rootScope.operate.unid  | '',
+                    'dbpath.s': $rootScope.operate.dataPath  | '',
+                    'curuser.s': $rootScope.userName  | '',
+                    'extension.s': '12',
+                    'company.s':$rootScope.company,
+                    'opin.s': ''
+            };
+
+
+            dataService.post('com.cecic.moa.base.action.RestAction','actionDocument',strJson,function (msg) {
+                 $state.go('main.' + $rootScope.backUrl);
+             },function(err){
+                 $state.go('main.' + $rootScope.backUrl);
+            });
         }
 
         function companyTitle(){

@@ -12,7 +12,7 @@
         </div>
         <div class="do-box" ng-if="vm.selectDiv == true">
             <div class="do-form do-form-select" data-tap-disabled=”true”>
-                <div class="do-from-div-select " ng-click="vm.sheetShow()" ng-bind="vm.selData" ></div>
+                <div class="do-from-div-select " ng-click="vm.sheetShow()" ng-bind="vm.selData"></div>
             </div>
             <div class="do-form">
                 <textarea rows="2" placeholder="请填写意见" ng-model="vm.selData" ></textarea>
@@ -44,7 +44,7 @@
             <div class="col col-50 col-50-action" ng-if="vm.actionDocBtn.fldShowYyBtn == 1" ng-click="vm.actionDocument('13')">已阅</div>
             <div class="col col-50 col-50-action" ng-if="vm.actionDocBtn.fldUndo == 1" ng-click="vm.actionDocument('9')">撤回</div>
             <div class="col col-50 col-50-action" ng-if="vm.actionDocBtn.fldsave == 1" ng-click="vm.actionDocument('8')">保存退出</div>
-            <div class="col col-50 col-50-action"  ng-click="vm.backPage()">退出</div>
+            <div class="col col-50 col-50-action" ng-click="vm.actionDocument('12')">退出</div>
         </div>
     </ion-content>
 </ion-view>

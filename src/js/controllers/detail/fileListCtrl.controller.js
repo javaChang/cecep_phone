@@ -24,6 +24,10 @@
          */
         function init() {
 
+            if($rootScope.fiels == undefined){
+                return false;
+            }
+
             if($rootScope.fiels.length <= 0){
                 vm.isFile = false;
             }else{

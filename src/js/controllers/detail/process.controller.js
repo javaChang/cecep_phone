@@ -24,6 +24,10 @@
         function init() {
 
             vm.detialTitle = $rootScope.detailTitle;
+
+            if($rootScope.DocumentAuthors == undefined){
+                return false;
+            }
             if($rootScope.DocumentAuthors != ''){
 
                 vm.DocumentAuthors = ($rootScope.DocumentAuthors).join(',');

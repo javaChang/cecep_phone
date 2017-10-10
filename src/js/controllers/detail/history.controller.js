@@ -27,6 +27,10 @@
             vm.detialTitle = $rootScope.detailTitle;
 
 			vm.historyList = $rootScope.optionInfos;
+			if(vm.historyList == undefined){
+                return false;
+            }
+
             if($rootScope.optionInfos.length <= 0){
                 vm.isHistory = false;
             }else{

@@ -20,7 +20,7 @@
         vm.jsonArryString = jsonArryString; //由于后台无法处理数组，需要将数组转换为字符串
         vm.sheetShow = sheetShow; //下拉框
         vm.detailRow = '';
-        vm.selDat = '';
+        vm.selData = '';
         vm.opinJson = '';
 
         // 调用初始化
@@ -34,7 +34,6 @@
         function init() {
 
             vm.detialTitle = $rootScope.detailTitle;
-
         	if($rootScope.selectOptions != ''){
                 // $rootScope.selectOptions.unshift('请选择');
                 vm.selectDate = $rootScope.selectOptions;
@@ -46,6 +45,9 @@
             vm.documentFlow = [];
 			// 流程id及名称组合
             for(var i = 0; i < vm.actionDocBtn.hfldNextflownum.length; i++) {
+                if(i == 0){
+                    vm.detailRow = vm.actionDocBtn.hfldNextflownum[i];
+                }
 				var folw = {
 					'id':vm.actionDocBtn.hfldNextflownum[i],
 					'name':vm.actionDocBtn.hfldNextflowstat[i]
@@ -77,14 +79,14 @@
         }
 
         function actionDocument(num) {
-            window.WebViewJavascriptBridge.callHandler('progressbar',{'popLoadding':'true'},'');
+
             switch (parseInt(num)) {
                 case 1:
                     if(vm.selData == '' || vm.selData == null){
                         $ionicLoading.show({
                             template: '请填写意见！',
                             noBackdrop: true,
-                            duration: 2000
+                            duration: 3000
                         });
                         return false;
                     }
@@ -93,7 +95,7 @@
                         $ionicLoading.show({
                             template: '请选择公文流转！',
                             noBackdrop: true,
-                            duration: 2000
+                            duration: 3000
                         });
                         return false;
                     }
@@ -116,7 +118,7 @@
                                 $ionicLoading.show({
                                     template: '请选择会签部门！',
                                     noBackdrop: true,
-                                    duration: 2000
+                                    duration: 3000
                                 });
                                 return false;
                             }
@@ -127,7 +129,7 @@
                                 $ionicLoading.show({
                                     template: '请选择会签部门！',
                                     noBackdrop: true,
-                                    duration: 2000
+                                    duration: 3000
                                 });
                                 return false;
                             }
@@ -140,7 +142,7 @@
                         $ionicLoading.show({
                             template: '请选择主办单位！',
                             noBackdrop: true,
-                            duration: 2000
+                            duration: 3000
                         });
                         return false;
                     }
@@ -150,7 +152,7 @@
                         $ionicLoading.show({
                             template: '请填写反馈意见！',
                             noBackdrop: true,
-                            duration: 2000
+                            duration: 3000
                         });
                         return false;
                     }
@@ -162,7 +164,7 @@
                         $ionicLoading.show({
                             template: '请填写反馈意见！',
                             noBackdrop: true,
-                            duration: 2000
+                            duration: 3000
                         });
                         return false;
                     }
@@ -175,7 +177,7 @@
                         $ionicLoading.show({
                             template: '请选择主送部门/抄送部门！',
                             noBackdrop: true,
-                            duration: 2000
+                            duration: 3000
                         });
                         return false;
                     }
@@ -183,7 +185,7 @@
 
             }
 
-
+            window.WebViewJavascriptBridge.callHandler('progressbar',{'popLoadding':'true'},'');
             $rootScope.fromDetailJson = vm.jsonArryString($rootScope.fromDetailJson);
 
             var strJson = {
@@ -199,12 +201,11 @@
             dataService.post('com.cecic.moa.base.action.RestAction','actionDocument',strJson,function (msg) {
                 window.WebViewJavascriptBridge.callHandler('progressbar',{'popLoadding':'false'},'');
                 if(parseInt(msg.data.res[0].h[0]['code.i']) == 0){
-
                     try{
                         $rootScope.actionDocument = JSON.parse(JSON.parse(msg.data.res[1].b[0]['data.s']).result);
                     } catch (e) {
                         $rootScope.actionDocument = JSON.parse(msg.data.res[1].b[0]['data.s']).result;
-                        console.log(e)
+                        console.log(e);
                     }
                     //流程结束
                     if(parseInt(vm.detailRow) == 9999){
@@ -234,12 +235,13 @@
                                 break;
                             case 8: //保存退出
                             case 9: //撤回
+                            case 12: //退出
                             case 13: //已阅
                             case 14:  //部门反馈
                                 $ionicLoading.show({
                                     template: '文件已自动提交！',
                                     noBackdrop: true,
-                                    duration: 1000
+                                    duration: 3000
                                 });
                                 $state.go('main.' + $rootScope.backUrl);
                                 break;
@@ -284,13 +286,11 @@
                 actionSheetJson.push(buttonsText);
            }
 
-
            var hideSheet = $ionicActionSheet.show({
                  buttons: actionSheetJson,
                  titleText: '请选择',
                  cancelText: '取消',
                  cancel: function() {
-
                       // add cancel code..
                  },
                  buttonClicked: function(index) {
