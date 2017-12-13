@@ -978,7 +978,46 @@
                 </li> -->
             </ul>
         </div>
-
+        <div ng-if="vm.fromType == 'jtldsw'">
+            <ul class="list detail-from">
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">文件标题</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldSubject"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">发文日期</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldswrq"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">拟稿单位</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldLwjg"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">发文编号</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.fldLwzh"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">紧急程度</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.Fldjinji"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row deital-row-li">
+                        <div class="col col-20">密级</div>
+                        <div class="col col-80" ng-bind="vm.detailfrom.Fldmiji"></div>
+                    </div>
+                </li>
+            </ul>
+        </div>
 
     </ion-content>
 </ion-view>

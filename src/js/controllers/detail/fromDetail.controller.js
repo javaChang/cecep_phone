@@ -44,6 +44,7 @@
             };
 
             dataService.post('com.cecic.moa.sign.action.SignAction','findGsign',strJson,function (msg) {
+                console.log(JSON.stringify(msg));
                 window.WebViewJavascriptBridge.callHandler('progressbar',{'popLoadding':'false'},'');
                 if (parseInt(msg.data.res[0].h[0]['code.i']) == 0) {
 
@@ -125,21 +126,23 @@
                         $rootScope.detailTitle = vm.companyTitle() + '签报';
                     }else{
                         $rootScope.fromDetailJson = {
-                            'fldSubject': vm.detailfrom.fldSubject,
-                            'Fldfwbh': vm.detailfrom.Fldfwbh,
-                            'fldcsld': vm.detailfrom.fldcsld ,
-                            'Fldjinji': vm.detailfrom.Fldjinji,
-                            'fldNiGaoDW': vm.detailfrom.fldNiGaoDW,
-                            'fldNiGaoRen': vm.detailfrom.fldNiGaoRen,
-                            'fldQiCaoRQ': vm.detailfrom.fldQiCaoRQ,
-                            'fldDh': vm.detailfrom.fldDh,
-                            'fldZhuSongDW': vm.detailfrom.fldZhuSongDW,
-                            'fldZhuSongDW_id': vm.detailfrom.fldZhuSongDW_id,
-                            'fldYueZhiBM': vm.detailfrom.fldYueZhiBM,
-                            'fldYueZhiBM_id': vm.detailfrom.fldYueZhiBM_id,
-                            'fldYueZhiRy': vm.detailfrom.fldYueZhiRy,
-                            'fldSwBeiZhu': vm.detailfrom.fldSwBeiZhu.data
+                            'fldSubject': vm.detailfrom.fldSubject
                         };
+                    }
+                    break;
+                case 'swgl_2.nsf':
+                    if(staut == 'n'){
+                        vm.hrefpage = 'jtldsw';
+                        $rootScope.detailTitle =  vm.companyTitle() + '领导收文';
+                    }else{
+                        $rootScope.fromDetailJson = {
+                            'fldSubject': vm.detailfrom.fldSubject,
+                            'fldswrq': vm.detailfrom.fldswrq,
+                            'fldLwjg': vm.detailfrom.fldLwjg ,
+                            'fldLwzh': vm.detailfrom.fldLwzh,
+                            'Fldjinji': vm.detailfrom.Fldjinji,
+                            'Fldmiji': vm.detailfrom.Fldmiji
+                        }
                     }
                     break;
                 case 'swgl_1.nsf': //集团收文

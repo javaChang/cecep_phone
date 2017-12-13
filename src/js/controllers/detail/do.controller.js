@@ -43,6 +43,7 @@
 			vm.actionDocBtn = $rootScope.operate;
 
             vm.documentFlow = [];
+            
 			// 流程id及名称组合
             for(var i = 0; i < vm.actionDocBtn.hfldNextflownum.length; i++) {
                 if(i == 0){
@@ -54,11 +55,15 @@
 				};
                 vm.documentFlow.push(folw);
             }
-
+            // if(vm.actionDocBtn.hfldNextflownum.length <= 0){
+            //     vm.selectDiv = false;
+            // }
             if($rootScope.backUrl == 'yb' || $rootScope.backUrl == 'yy'){
                 vm.selectDiv = false;
             }
-
+            if($rootScope.backUrl == 'dy'){
+                vm.selectDiv = false;
+            }
             if( vm.documentFlow.length <= 0 ){
                 vm.docmentBtn = false;
             }

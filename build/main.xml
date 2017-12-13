@@ -1,1 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?> <mainAPP xmlns:ns="http://www.w3.org/TR/html4/" id="1oGJJEuBo8dyEonoTY2jhCMh" versionCode="1" versionName="1.0"><uses-sdk minSdkVersion="8" targetSdkVersion="21"/><application name="移动OA" screenOrientation="sensor" icon="icon" theme="default"><main name="index.html"></main></application><use-permission name="LIGHT_USER_ALL"/></mainAPP>

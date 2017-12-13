@@ -105,6 +105,7 @@
                     // 'userName.s': 'wangzining1'
                 };
                 dataService.post('com.nqsky.meap.api.sso.service.ISsoAPIService', 'login', dataStr, function (msg) {
+                    console.log(JSON.stringify(msg));
                     if (parseInt(msg.data.res[0].h[0]['code.i']) == 0) {
                         $rootScope.ssoTickey = msg.data.res[1].b[4]['ssoCertification'][0]['access_token.s'];
                         $rootScope.realName = msg.data.res[1].b[1]['UserAccount'][0]['realName.s'];
@@ -144,6 +145,7 @@
          */
 
         function getDatas() {
+
             //获取代办列表
             var strJson = {
                 'docType.s': 'db_list',
@@ -162,7 +164,8 @@
                     vm.listItem = JSON.parse(msg.data.res[1].b[0]['data.s']).datas;
 
 
-                    if(vm.listData.length < vm.pageSize) {
+
+                    if(vm.listData.length < vm.pageSize * 1) {
                         vm.disabled = false;
 
                         if(vm.listData.length == 0) {
@@ -187,7 +190,7 @@
                 window.WebViewJavascriptBridge.callHandler('progressbar',{'popLoadding':'false'},'');
                 // 模态框
                 $ionicLoading.show({
-                    template: '由于网络原因，打开失败请再次打开轻应用！！',
+                    template: '网络异常，请重新打开轻应用！！',
                     noBackdrop: true,
                     duration: 3000
                 });
@@ -250,7 +253,7 @@
 
                 // 模态框
                 $ionicLoading.show({
-                    template: '网络连接错误，请重新下拉刷新数据！',
+                    template: '网络异常，刷新数据失败！',
                     noBackdrop: true,
                     duration: 3000
                 });
@@ -285,6 +288,7 @@
             dataService.post('com.cecic.moa.base.action.RestAction','gwUrl',strJson,function (msg) {
                 vm.menu = true;
                 vm.code = msg.data.res[0]['h'][0]['code.i'];
+                console.log(JSON.stringify(msg));
                 if (vm.code == 0) {
 
                     $rootScope.deptName = JSON.parse(msg.data.res[1].b[0]['data.s'])[0].menuName;
@@ -294,7 +298,7 @@
                 } else {
                     // 模态框
                     $ionicLoading.show({
-                        template: '由于网络愿意，获取菜单失败请再次打开！！',
+                        template: msg.data.res[1].b[0].error[0]['message.s'],
                         noBackdrop: true,
                         duration: 3000
                     });
